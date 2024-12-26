@@ -1,0 +1,20 @@
+{
+  "name": "@anaplian/core",
+  "version": "0.0.0",
+  "description": "Anaplian core library for long running AI agent development",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo ran test",
+    "build": "echo ran build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaplian-io/anaplian.git"
+  },
+  "author": "Anaplian.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anaplian-io/anaplian/issues"
+  },
+  "homepage": "https://github.com/anaplian-io/anaplian/packages/anaplian-core"
+}
