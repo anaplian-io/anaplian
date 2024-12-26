@@ -27,6 +27,7 @@ jobs:
   release:
     name: Release Job
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20.x
