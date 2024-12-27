@@ -3,7 +3,6 @@
     "target": "ES2021",
     "lib": ["ES2021", "ES2022.Object", "DOM"],
     "module": "ES2020",
-    "moduleResolution": "nodenext",
     "esModuleInterop": true,
     "declaration": true,
     "noImplicitReturns": true,
@@ -11,10 +10,14 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "useDefineForClassFields": true,
-    "strictPropertyInitialization": false,
-    "allowJs": true,
-    "strict": true
+    "strictPropertyInitialization": true,
+    "sourceMap": true,
+    "inlineSourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "rootDir": "src"
   },
-  "include": ["packages/*/src/**/*"],
-  "exclude": ["node_modules", "**/dist/"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/dist/"],
 }

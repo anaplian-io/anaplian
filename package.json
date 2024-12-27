@@ -9,9 +9,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier .",
-    "format": "prettier --write .",
-    "build": "lerna run build",
+    "format": "npm run lint:fix && prettier --write .",
+    "build": "npm run lint && npm run prettier && lerna run build",
     "test": "lerna run test",
+    "test:ci": "lerna run test:ci",
     "semantic-release": "lerna exec --concurrency 1 -- npx --no-install semantic-release",
     "prepare": "husky"
   },
@@ -41,7 +42,6 @@
     "prettier": "^3.4.2",
     "semantic-release": "^24.2.0",
     "semantic-release-monorepo": "^8.0.2",
-    "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2"
   }
 }
