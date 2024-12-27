@@ -13,6 +13,7 @@
     "build": "npm run lint && npm run prettier && lerna run build",
     "test": "lerna run test",
     "test:ci": "lerna run test:ci",
+    "clean": "lerna run clean",
     "semantic-release": "lerna exec --concurrency 1 -- npx --no-install semantic-release",
     "prepare": "husky"
   },
@@ -25,7 +26,6 @@
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
-    "@eslint/js": "^9.17.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.0",
     "@semantic-release/git": "^10.0.1",

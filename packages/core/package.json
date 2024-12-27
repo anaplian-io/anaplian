@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "test:ci": "jest --coverage -ci --reporters=default",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist coverage",
     "build": "tsc"
   },
   "exports": {
