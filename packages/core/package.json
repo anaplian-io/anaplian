@@ -8,6 +8,7 @@
     "test": "jest",
     "test:ci": "jest --coverage -ci --reporters=default",
     "clean": "rm -rf dist coverage",
+    "semantic-release": "semantic-release",
     "build": "tsc"
   },
   "exports": {

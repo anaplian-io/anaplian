@@ -14,7 +14,7 @@
     "test": "lerna run test",
     "test:ci": "lerna run test:ci",
     "clean": "lerna run clean",
-    "semantic-release": "lerna exec --concurrency 1 -- npx --no-install semantic-release",
+    "semantic-release": "lerna run semantic-release",
     "prepare": "husky"
   },
   "workspaces": [
