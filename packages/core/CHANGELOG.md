@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.0.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.0.1...@anaplian/core-v1.0.2) (2024-12-28)
+
+
+### Bug Fixes
+
+* dummy sync to get github and npm on the same versioning ([e40efd1](https://github.com/anaplian-io/anaplian/commit/e40efd1b2383431c8b1f75719f5cd6716e651538))
+
 # [@anaplian/core-v1.0.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.0.0...@anaplian/core-v1.0.1) (2024-12-28)
 
 
