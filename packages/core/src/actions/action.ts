@@ -50,7 +50,7 @@ export interface Action {
 
   /**
    * Function that will be applied on action invocation. If the agent has provided an invalid value,
-   * the implementer should throw {@link InvalidArgumentError}
+   * the implementer should throw {@link InvalidArgumentError}.
    *
    * @param {Record<string, string>} args - An object mapping argument names to the values provided by the agent.
    * This field is validated to ensure all arguments have been provided.
@@ -70,7 +70,7 @@ export class InvalidArgumentError extends AgentError {
    * @param {ActionArgument} invalidArgument - The argument passed that was invalid.
    */
   constructor(invalidArgument: ActionArgument) {
-    super();
+    super(`Argument ${invalidArgument.name} has an invalid value`);
     this.invalidArgument = invalidArgument;
   }
 }
