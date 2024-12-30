@@ -13,10 +13,7 @@ const commandRegex = /^(\w+)\((.*)\)$/;
 const argumentRegex = /"(?:\\.|[^"\\])*"/g;
 
 export class ActionExecutor {
-  private readonly props: ActionExecutorProps;
-  constructor(props: ActionExecutorProps) {
-    this.props = props;
-  }
+  constructor(private readonly props: ActionExecutorProps) {}
 
   public readonly execute = async (agentInput: string): Promise<string> => {
     const { availableActions } = this.props;

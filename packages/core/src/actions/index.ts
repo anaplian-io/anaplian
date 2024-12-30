@@ -1,1 +1,1 @@
-export { Action, ActionArgument } from './action';
+export { Action, ActionArgument, InvalidArgumentError } from './action';

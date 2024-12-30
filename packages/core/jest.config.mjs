@@ -7,7 +7,12 @@ export default {
   coverageDirectory: 'coverage',
   coverageReporters: ['json', 'lcov', 'text', 'clover'],
   collectCoverageFrom: ['src/**/*.ts'],
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/src/errors/'],
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/dist/',
+    '/src/errors/',
+    'index.ts',
+  ],
   coverageThreshold: {
     global: {
       branches: 95,

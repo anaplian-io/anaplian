@@ -2,7 +2,7 @@ import { Formatter } from './formatter';
 import { Action } from '../actions';
 import { PromptTemplate } from '@langchain/core/prompts';
 
-export interface ActionFormatterProps {
+export interface ActionDocumentationFormatterProps {
   readonly leftPadding: string;
 }
 
@@ -27,11 +27,8 @@ const fullPrompt = PromptTemplate.fromTemplate(`
 {examples}
 `);
 
-export class ActionFormatter implements Formatter<Action> {
-  private readonly props: ActionFormatterProps;
-  constructor(props: ActionFormatterProps) {
-    this.props = props;
-  }
+export class ActionDocumentationFormatter implements Formatter<Action> {
+  constructor(private readonly props: ActionDocumentationFormatterProps) {}
   public readonly format = async (item: Action): Promise<string> => {
     const headerFormatter = headerPrompt.format({
       padding: this.props.leftPadding,
