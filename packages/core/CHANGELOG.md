@@ -1,3 +1,11 @@
+# [@anaplian/core-v1.1.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.0.3...@anaplian/core-v1.1.0) (2024-12-30)
+
+
+### Features
+
+* implemented action handler and validator ([4cd9801](https://github.com/anaplian-io/anaplian/commit/4cd9801bcffdfdb6690e1e1b80ea28ae8f4456b3))
+* implemented context creator and its associated interfaces ([6c1922d](https://github.com/anaplian-io/anaplian/commit/6c1922d473dc7fe78ac5120c12d2a821ca38275a))
+
 # [@anaplian/core-v1.0.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.0.2...@anaplian/core-v1.0.3) (2024-12-28)
 
 
