@@ -12,7 +12,7 @@
     "build": "tsc"
   },
   "exports": {
-    "./actions": "./dist/actions/index.js"
+    ".": "./index.js"
   },
   "files": [
     "dist/**/*"
