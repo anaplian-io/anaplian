@@ -1,10 +1,10 @@
 import { Formatter } from '../formatter';
 import { Action } from '../../actions';
-import { ActionFormatter } from '../action-formatter';
+import { ActionDocumentationFormatter } from '../action-documentation-formatter';
 
-describe('ActionFormatter', () => {
+describe('ActionDocumentationFormatter', () => {
   it('formats a NOP', async () => {
-    const formatter: Formatter<Action> = new ActionFormatter({
+    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
     const action: Action = {
@@ -29,7 +29,7 @@ describe('ActionFormatter', () => {
   });
 
   it('formats a NOP with no examples', async () => {
-    const formatter: Formatter<Action> = new ActionFormatter({
+    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
     const action: Action = {
@@ -45,7 +45,7 @@ describe('ActionFormatter', () => {
   });
 
   it('formats a search with several examples', async () => {
-    const formatter: Formatter<Action> = new ActionFormatter({
+    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
     const action: Action = {
@@ -83,7 +83,7 @@ describe('ActionFormatter', () => {
   });
 
   it('formats an addition operation with several examples', async () => {
-    const formatter: Formatter<Action> = new ActionFormatter({
+    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
     const action: Action = {

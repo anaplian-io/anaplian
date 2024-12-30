@@ -1,4 +1,4 @@
-import { AgentError } from '../errors';
+import { AgentError } from '../errors/agent-error';
 
 /**
  * Defines a single argument that will be passed by the agent.
@@ -41,7 +41,7 @@ export interface Action {
   readonly description: string;
 
   /**
-   * Full examples of inputs and outputs of this action.
+   * Optional examples of inputs and outputs of this action.
    */
   readonly examples?: {
     readonly arguments?: string[];
