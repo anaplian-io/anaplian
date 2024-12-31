@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.2.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.1.0...@anaplian/core-v1.2.0) (2024-12-31)
+
+
+### Features
+
+* built agent orchestrator ([76a345b](https://github.com/anaplian-io/anaplian/commit/76a345b7e9f8a20da3f72a95128c9c57811fe7ee))
+
 # [@anaplian/core-v1.1.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.0.3...@anaplian/core-v1.1.0) (2024-12-30)
 
 
