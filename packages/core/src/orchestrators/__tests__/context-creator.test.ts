@@ -1,5 +1,5 @@
 import { BaseLLM } from '@langchain/core/language_models/llms';
-import { ContextProvider } from '../context';
+import { ContextProvider } from '../../contexts';
 import { ContextCreator } from '../context-creator';
 import { ContextConstructionError } from '../../errors/context-construction-error';
 
@@ -244,6 +244,8 @@ describe('ContextCreator', () => {
     );
     expect(nextContext).toStrictEqual({
       foo: {
+        ERROR:
+          'Context provider "foo" used 6992 tokens, which exceeds its maximum allocation of 6000 tokens',
         firstField: '0',
         secondField: 1,
       },

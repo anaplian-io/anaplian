@@ -1,4 +1,4 @@
-import { Action, InvalidArgumentError } from '../action';
+import { Action, InvalidArgumentError } from '../../actions';
 import { ActionExecutor } from '../action-executor';
 import {
   IncorrectActionUsageError,
