@@ -68,6 +68,7 @@ export class AgentOrchestrator {
         this.props.events
           .afterIterationEnd(this.currentContext)
           .catch(() => {});
+        await this.yieldToEventLoop();
       } catch (error) {
         this.props.events.onFatalError(error).catch(() => {});
         await this.shutdown();
@@ -82,5 +83,9 @@ export class AgentOrchestrator {
         .beforeShutdown(this.currentContext)
         .catch(() => {});
     }
+  };
+
+  private readonly yieldToEventLoop = async () => {
+    await new Promise((accept) => setImmediate(accept));
   };
 }

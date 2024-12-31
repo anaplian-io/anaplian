@@ -17,6 +17,10 @@ describe('AgentOrchestrator', () => {
 
   let orchestrator: AgentOrchestrator;
 
+  const yieldToEventLoop = async () => {
+    await new Promise((accept) => setImmediate(accept));
+  };
+
   beforeEach(() => {
     mockModel = {
       invoke: jest.fn().mockResolvedValue('mocked model output'),
@@ -40,11 +44,7 @@ describe('AgentOrchestrator', () => {
       beforeIterationStart: jest
         .fn()
         .mockImplementation(() => Promise.reject()),
-      afterIterationEnd: jest
-        .fn()
-        .mockImplementation(() =>
-          orchestrator.shutdown().then(() => Promise.reject()),
-        ),
+      afterIterationEnd: jest.fn().mockImplementation(() => Promise.reject()),
       beforeShutdown: jest.fn().mockImplementation(() => Promise.reject()),
       afterInitialize: jest.fn().mockImplementation(() => Promise.reject()),
       onFatalError: jest.fn().mockImplementation(() => Promise.reject()),
@@ -63,7 +63,8 @@ describe('AgentOrchestrator', () => {
 
   describe('run', () => {
     it('should initialize the context and complete one iteration successfully', async () => {
-      await orchestrator.run();
+      const runPromise = orchestrator.run();
+      await yieldToEventLoop();
 
       expect(mockContextCreator.createInitialContext).toHaveBeenCalled();
       expect(mockEvents.afterInitialize).toHaveBeenCalledWith({
@@ -89,6 +90,7 @@ describe('AgentOrchestrator', () => {
       });
 
       await orchestrator.shutdown();
+      await runPromise;
     });
 
     it('should not initialize the context and complete one iteration successfully', async () => {
@@ -104,7 +106,8 @@ describe('AgentOrchestrator', () => {
           },
         },
       });
-      await orchestrator.run();
+      const runPromise = orchestrator.run();
+      await yieldToEventLoop();
 
       expect(mockContextCreator.createInitialContext).not.toHaveBeenCalled();
       expect(mockEvents.afterInitialize).toHaveBeenCalledWith({
@@ -142,6 +145,7 @@ describe('AgentOrchestrator', () => {
       });
 
       await orchestrator.shutdown();
+      await runPromise;
     });
 
     it('should handle errors gracefully and shut down', async () => {
@@ -160,7 +164,8 @@ describe('AgentOrchestrator', () => {
         new AgentError('Mock Agent Error'),
       );
 
-      await orchestrator.run();
+      const runPromise = orchestrator.run();
+      await yieldToEventLoop();
 
       expect(mockContextCreator.createNextContext).toHaveBeenCalledWith({
         actionResult: 'ERROR: Mock Agent Error',
@@ -169,6 +174,7 @@ describe('AgentOrchestrator', () => {
       });
 
       await orchestrator.shutdown();
+      await runPromise;
     });
   });
 
