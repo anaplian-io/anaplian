@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.2.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.2.0...@anaplian/core-v1.2.1) (2024-12-31)
+
+
+### Bug Fixes
+
+* **core:** the agent loop now yields control to the event loop after each iteration ([3bfc297](https://github.com/anaplian-io/anaplian/commit/3bfc2978d76fb59f7ed1152e75bb1d18f316f309))
+
 # [@anaplian/core-v1.2.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.1.0...@anaplian/core-v1.2.0) (2024-12-31)
 
 
