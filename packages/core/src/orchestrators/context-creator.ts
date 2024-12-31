@@ -1,10 +1,11 @@
 import { BaseLLM } from '@langchain/core/language_models/llms';
-import { ContextProvider, GetNextContextProps } from './context';
+import { ContextProvider, GetNextContextProps } from '../contexts/context';
 import { ContextConstructionError } from '../errors/context-construction-error';
+import { Context, Serializer } from '../common/types';
 
 export interface ContextCreatorProps {
   readonly model: BaseLLM;
-  readonly serializer: (obj: Record<string, unknown>) => string;
+  readonly serializer: Serializer;
   readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
     readonly maximumAllowedTokens: number;
@@ -14,9 +15,7 @@ export interface ContextCreatorProps {
 export class ContextCreator {
   constructor(private readonly props: ContextCreatorProps) {}
 
-  public readonly createInitialContext = async (): Promise<
-    Record<string, unknown>
-  > =>
+  public readonly createInitialContext = async (): Promise<Context> =>
     Object.fromEntries(
       await Promise.all(
         this.props.contextProviders.map(async (bundle) => [
@@ -38,7 +37,7 @@ export class ContextCreator {
                   `Context provider ${bundle.provider.key} used ${tokensUsed} tokens, which exceeds its maximum allocation of ${bundle.maximumAllowedTokens} tokens`,
                 );
               }
-              return newContext;
+              return Object.freeze(newContext);
             }),
         ]),
       ),
@@ -49,7 +48,7 @@ export class ContextCreator {
       GetNextContextProps<never, never>,
       'maximumAllowedTokens' | 'getTokenCount'
     >,
-  ): Promise<Record<string, unknown>> =>
+  ): Promise<Context> =>
     Object.fromEntries(
       await Promise.all(
         this.props.contextProviders.map(async (bundle) => [
@@ -71,14 +70,17 @@ export class ContextCreator {
               );
               if (tokensUsed > bundle.maximumAllowedTokens) {
                 throw new ContextConstructionError(
-                  `Context provider ${bundle.provider.key} used ${tokensUsed} tokens, which exceeds its maximum allocation of ${bundle.maximumAllowedTokens} tokens`,
+                  `Context provider "${bundle.provider.key}" used ${tokensUsed} tokens, which exceeds its maximum allocation of ${bundle.maximumAllowedTokens} tokens`,
                 );
               }
-              return newContext;
+              return Object.freeze(newContext);
             })
             .catch((error) => {
               if (error instanceof ContextConstructionError) {
-                return prior.priorContext[bundle.provider.key]!;
+                return Object.freeze({
+                  ...prior.priorContext[bundle.provider.key]!,
+                  ERROR: error.message,
+                });
               }
               throw error;
             }),

@@ -1,11 +1,11 @@
 import { ActionDocumentationFormatterProps } from './action-documentation-formatter';
 import { Formatter } from './formatter';
-import { ContextProvider } from '../contexts';
 import { PromptTemplate } from '@langchain/core/prompts';
+import { ContextProviderDocumentation, Serializer } from '../common/types';
 
 export type ContextProviderDocumentationFormatterProps =
   ActionDocumentationFormatterProps & {
-    readonly objectSerializer: (obj: Record<string, unknown>) => string;
+    readonly objectSerializer: Serializer;
   };
 
 const headerPrompt = PromptTemplate.fromTemplate(
@@ -31,22 +31,13 @@ const fullPrompt = PromptTemplate.fromTemplate(`
 `);
 
 export class ContextProviderDocumentationFormatter
-  implements
-    Formatter<
-      Omit<
-        ContextProvider<string, Record<string, unknown>>,
-        'getInitialContext' | 'getNextContext'
-      >
-    >
+  implements Formatter<ContextProviderDocumentation>
 {
   constructor(
     private readonly props: ContextProviderDocumentationFormatterProps,
   ) {}
   public readonly format = async (
-    item: Omit<
-      ContextProvider<string, Record<string, unknown>>,
-      'getInitialContext' | 'getNextContext'
-    >,
+    item: ContextProviderDocumentation,
   ): Promise<string> => {
     const headerFormatter = headerPrompt.format({
       padding: this.props.leftPadding,
