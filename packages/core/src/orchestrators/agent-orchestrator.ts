@@ -1,4 +1,4 @@
-import { AnaplianModel, Context } from '../common/types';
+import { AnaplianAgent, AnaplianModel, Context } from '../common/types';
 import { ContextCreator } from './context-creator';
 import { ActionExecutor } from './action-executor';
 import { ModelOutputParser } from '../parsers/model-output-parser';
@@ -24,7 +24,7 @@ export class AgentOrchestrator {
   private currentContext: Context = {};
   constructor(private readonly props: AgentOrchestratorProps) {}
 
-  public readonly run = async (): Promise<void> => {
+  public readonly run: AnaplianAgent['run'] = async () => {
     if (this.props.initialContext) {
       this.currentContext = Object.freeze(this.props.initialContext);
     } else {
@@ -76,7 +76,7 @@ export class AgentOrchestrator {
     }
   };
 
-  public readonly shutdown = async (): Promise<void> => {
+  public readonly shutdown: AnaplianAgent['shutdown'] = async () => {
     if (!this.shuttingDown) {
       this.shuttingDown = true;
       await this.props.events

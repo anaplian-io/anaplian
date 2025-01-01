@@ -1,7 +1,7 @@
-import { BaseLLM } from '@langchain/core/language_models/llms';
 import { ContextProvider } from '../../contexts';
 import { ContextCreator } from '../context-creator';
 import { ContextConstructionError } from '../../errors/context-construction-error';
+import { AnaplianModel } from '../../common/types';
 
 describe('ContextCreator', () => {
   const getContextMockFunction = (returnObject: object) =>
@@ -59,8 +59,8 @@ describe('ContextCreator', () => {
   it('creates an initial context from two providers', async () => {
     expect.assertions(9);
     const mockModel = {
-      getNumTokens: jest.fn().mockResolvedValue(6992),
-    } as unknown as BaseLLM;
+      getTokenCount: jest.fn().mockResolvedValue(6992),
+    } as unknown as AnaplianModel;
     const contextProviders = [
       {
         provider: <ContextProvider<never, never>>firstMockContextProvider,
@@ -81,7 +81,7 @@ describe('ContextCreator', () => {
     });
     const initialContext = await contextCreator.createInitialContext();
     expect(mockSerializer).toHaveBeenCalledTimes(4);
-    expect(mockModel.getNumTokens).toHaveBeenCalledTimes(4);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(4);
     expect(firstMockContextProvider.getInitialContext).toHaveBeenCalledTimes(1);
     expect(secondMockContextProvider.getInitialContext).toHaveBeenCalledTimes(
       1,
@@ -102,8 +102,8 @@ describe('ContextCreator', () => {
   it('fails to create an initial context from two providers because of an exceeded token limit', async () => {
     expect.assertions(9);
     const mockModel = {
-      getNumTokens: jest.fn().mockResolvedValue(6992),
-    } as unknown as BaseLLM;
+      getTokenCount: jest.fn().mockResolvedValue(6992),
+    } as unknown as AnaplianModel;
     const contextProviders = [
       {
         provider: <ContextProvider<never, never>>firstMockContextProvider,
@@ -126,7 +126,7 @@ describe('ContextCreator', () => {
       ContextConstructionError,
     );
     expect(mockSerializer).toHaveBeenCalledTimes(4);
-    expect(mockModel.getNumTokens).toHaveBeenCalledTimes(4);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(4);
     expect(firstMockContextProvider.getInitialContext).toHaveBeenCalledTimes(1);
     expect(secondMockContextProvider.getInitialContext).toHaveBeenCalledTimes(
       1,
@@ -138,8 +138,8 @@ describe('ContextCreator', () => {
   it('creates next from two providers', async () => {
     expect.assertions(9);
     const mockModel = {
-      getNumTokens: jest.fn().mockResolvedValue(6992),
-    } as unknown as BaseLLM;
+      getTokenCount: jest.fn().mockResolvedValue(6992),
+    } as unknown as AnaplianModel;
     const contextProviders = [
       {
         provider: <ContextProvider<never, never>>firstMockContextProvider,
@@ -174,7 +174,7 @@ describe('ContextCreator', () => {
     const nextContext =
       await contextCreator.createNextContext(nextContextArgument);
     expect(mockSerializer).toHaveBeenCalledTimes(4);
-    expect(mockModel.getNumTokens).toHaveBeenCalledTimes(4);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(4);
     expect(firstMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(secondMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(firstMockContextProvider.getNextContext).toHaveBeenCalledWith(
@@ -197,8 +197,8 @@ describe('ContextCreator', () => {
   it('creates next from two providers while falling back to a prior', async () => {
     expect.assertions(9);
     const mockModel = {
-      getNumTokens: jest.fn().mockResolvedValue(6992),
-    } as unknown as BaseLLM;
+      getTokenCount: jest.fn().mockResolvedValue(6992),
+    } as unknown as AnaplianModel;
     const contextProviders = [
       {
         provider: <ContextProvider<never, never>>firstMockContextProvider,
@@ -233,7 +233,7 @@ describe('ContextCreator', () => {
     const nextContext =
       await contextCreator.createNextContext(nextContextArgument);
     expect(mockSerializer).toHaveBeenCalledTimes(4);
-    expect(mockModel.getNumTokens).toHaveBeenCalledTimes(4);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(4);
     expect(firstMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(secondMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(firstMockContextProvider.getNextContext).toHaveBeenCalledWith(
@@ -258,8 +258,8 @@ describe('ContextCreator', () => {
   it('fails to create a next context', async () => {
     expect.assertions(7);
     const mockModel = {
-      getNumTokens: jest.fn().mockRejectedValue(new Error()),
-    } as unknown as BaseLLM;
+      getTokenCount: jest.fn().mockRejectedValue(new Error()),
+    } as unknown as AnaplianModel;
     const contextProviders = [
       {
         provider: <ContextProvider<never, never>>firstMockContextProvider,
@@ -295,7 +295,7 @@ describe('ContextCreator', () => {
       contextCreator.createNextContext(nextContextArgument),
     ).rejects.toThrow();
     expect(mockSerializer).toHaveBeenCalledTimes(2);
-    expect(mockModel.getNumTokens).toHaveBeenCalledTimes(2);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(2);
     expect(firstMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(secondMockContextProvider.getInitialContext).not.toHaveBeenCalled();
     expect(firstMockContextProvider.getNextContext).toHaveBeenCalledWith(
