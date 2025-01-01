@@ -1,10 +1,9 @@
-import { BaseLLM } from '@langchain/core/language_models/llms';
 import { ContextProvider, GetNextContextProps } from '../contexts/context';
 import { ContextConstructionError } from '../errors/context-construction-error';
-import { Context, Serializer } from '../common/types';
+import { AnaplianModel, Context, Serializer } from '../common/types';
 
 export interface ContextCreatorProps {
-  readonly model: BaseLLM;
+  readonly model: AnaplianModel;
   readonly serializer: Serializer;
   readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
@@ -23,13 +22,13 @@ export class ContextCreator {
           await bundle.provider
             .getInitialContext({
               getTokenCount: async (context) =>
-                await this.props.model.getNumTokens(
+                await this.props.model.getTokenCount(
                   this.props.serializer(context),
                 ),
               maximumAllowedTokens: bundle.maximumAllowedTokens,
             })
             .then(async (newContext) => {
-              const tokensUsed = await this.props.model.getNumTokens(
+              const tokensUsed = await this.props.model.getTokenCount(
                 this.props.serializer(newContext),
               );
               if (tokensUsed > bundle.maximumAllowedTokens) {
@@ -56,7 +55,7 @@ export class ContextCreator {
           await bundle.provider
             .getNextContext({
               getTokenCount: async (context) =>
-                await this.props.model.getNumTokens(
+                await this.props.model.getTokenCount(
                   this.props.serializer(context),
                 ),
               maximumAllowedTokens: bundle.maximumAllowedTokens,
@@ -65,7 +64,7 @@ export class ContextCreator {
               priorContext: prior.priorContext,
             })
             .then(async (newContext) => {
-              const tokensUsed = await this.props.model.getNumTokens(
+              const tokensUsed = await this.props.model.getTokenCount(
                 this.props.serializer(newContext),
               );
               if (tokensUsed > bundle.maximumAllowedTokens) {
