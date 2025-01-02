@@ -47,7 +47,7 @@ describe('AgentOrchestrator', () => {
       afterIterationEnd: jest.fn().mockImplementation(() => Promise.reject()),
       beforeShutdown: jest.fn().mockImplementation(() => Promise.reject()),
       afterInitialize: jest.fn().mockImplementation(() => Promise.reject()),
-      onFatalError: jest.fn().mockImplementation(() => Promise.reject()),
+      fatalError: jest.fn().mockImplementation(() => Promise.reject()),
     };
 
     const props: AgentOrchestratorProps = {
@@ -153,7 +153,7 @@ describe('AgentOrchestrator', () => {
 
       await orchestrator.run();
 
-      expect(mockEvents.onFatalError).toHaveBeenCalledWith(expect.any(Error));
+      expect(mockEvents.fatalError).toHaveBeenCalledWith(expect.any(Error));
       expect(mockEvents.beforeShutdown).toHaveBeenCalledWith({
         initial: 'context',
       });

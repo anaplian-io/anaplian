@@ -1,8 +1,9 @@
-import { AnaplianAgent, AnaplianModel, Context } from '../common/types';
+import { AnaplianModel, Context } from '../common/types';
 import { ContextCreator } from './context-creator';
 import { ActionExecutor } from './action-executor';
 import { ModelOutputParser } from '../parsers/model-output-parser';
 import { AgentError } from '../errors/agent-error';
+import { AnaplianAgent } from '../agents';
 
 export interface AgentOrchestratorProps {
   readonly contextCreator: ContextCreator;
@@ -15,7 +16,7 @@ export interface AgentOrchestratorProps {
     readonly afterIterationEnd: (context: Context) => Promise<void>;
     readonly beforeShutdown: (context: Context) => Promise<void>;
     readonly afterInitialize: (context: Context) => Promise<void>;
-    readonly onFatalError: (error: unknown) => Promise<void>;
+    readonly fatalError: (error: unknown) => Promise<void>;
   };
 }
 
@@ -70,7 +71,7 @@ export class AgentOrchestrator {
           .catch(() => {});
         await this.yieldToEventLoop();
       } catch (error) {
-        this.props.events.onFatalError(error).catch(() => {});
+        this.props.events.fatalError(error).catch(() => {});
         await this.shutdown();
       }
     }
