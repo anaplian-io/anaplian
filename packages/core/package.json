@@ -12,11 +12,9 @@
     "build": "tsc"
   },
   "exports": {
-    ".": "./index.js"
+    ".": "./dist/index.js"
   },
-  "files": [
-    "dist/**/*"
-  ],
+  "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anaplian-io/anaplian.git"
