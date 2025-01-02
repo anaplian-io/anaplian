@@ -25,4 +25,5 @@ export const modelContextSizes = {
   'llama3.3-70b': 128000,
   'gpt-4o': 128000,
   'gpt-4o-mini': 128000,
+  'claude-3-5-sonnet': 200000,
 };
