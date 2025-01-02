@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.3.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.3.0...@anaplian/core-v1.3.1) (2025-01-02)
+
+
+### Bug Fixes
+
+* **core:** adjust exports and types to make exporting package work correctly ([dedbc15](https://github.com/anaplian-io/anaplian/commit/dedbc1570ea3c8e0173305f882ffdd23adf6ad2f))
+
 # [@anaplian/core-v1.3.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.2.1...@anaplian/core-v1.3.0) (2025-01-02)
 
 
