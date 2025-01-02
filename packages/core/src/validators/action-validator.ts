@@ -10,21 +10,21 @@ export class ActionValidator implements Validator<Action> {
     if (!action.name.match(nameRegex)) {
       return {
         valid: false,
-        reason: `Action name "${action.name}" does not match regex ${nameRegex}`,
+        reason: `${action.name}: Action name "${action.name}" does not match regex ${nameRegex}`,
       };
     }
     const invalidExamples = this.getInvalidExamples(action);
     if (invalidExamples.length > 0) {
       return {
         valid: false,
-        reason: `Found an example with ${invalidExamples[0]?.arguments?.length} argument(s) but ${action.arguments?.length || 0} expected.`,
+        reason: `${action.name}: Found an example with ${invalidExamples[0]?.arguments?.length} argument(s) but ${action.arguments?.length || 0} expected.`,
       };
     }
     const invalidArguments = this.getInvalidArguments(action);
     if (invalidArguments.length > 0) {
       return {
         valid: false,
-        reason: `Argument "${invalidArguments[0]?.name}" does not match regex ${nameRegex}`,
+        reason: `${action.name}: Argument "${invalidArguments[0]?.name}" does not match regex ${nameRegex}`,
       };
     }
     return {

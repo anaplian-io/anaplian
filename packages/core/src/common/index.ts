@@ -1,1 +1,1 @@
-export { AnaplianAgent } from './types';
+export { Context } from './types';
