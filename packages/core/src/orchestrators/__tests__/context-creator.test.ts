@@ -244,8 +244,11 @@ describe('ContextCreator', () => {
     );
     expect(nextContext).toStrictEqual({
       foo: {
-        ERROR:
-          'Context provider "foo" used 6992 tokens, which exceeds its maximum allocation of 6000 tokens',
+        ERROR: {
+          message:
+            'Context provider "foo" used 6992 tokens, which exceeds its maximum allocation of 6000 tokens',
+          code: 'CONTEXT_EXCEEDED_MAXIMUM_TOKENS',
+        },
         firstField: '0',
         secondField: 1,
       },
@@ -258,7 +261,7 @@ describe('ContextCreator', () => {
   it('fails to create a next context', async () => {
     expect.assertions(7);
     const mockModel = {
-      getTokenCount: jest.fn().mockRejectedValue(new Error()),
+      getTokenCount: jest.fn().mockRejectedValue(new Error('Something failed')),
     } as unknown as AnaplianModel;
     const contextProviders = [
       {
@@ -293,7 +296,78 @@ describe('ContextCreator', () => {
     };
     await expect(
       contextCreator.createNextContext(nextContextArgument),
-    ).rejects.toThrow();
+    ).resolves.toStrictEqual({
+      bar: {
+        ERROR: { code: 'UNHANDLED_ERROR_THROWN', message: 'Something failed' },
+        firstField: ['0', '1'],
+      },
+      foo: {
+        ERROR: { code: 'UNHANDLED_ERROR_THROWN', message: 'Something failed' },
+        firstField: '0',
+        secondField: 1,
+      },
+    });
+    expect(mockSerializer).toHaveBeenCalledTimes(2);
+    expect(mockModel.getTokenCount).toHaveBeenCalledTimes(2);
+    expect(firstMockContextProvider.getInitialContext).not.toHaveBeenCalled();
+    expect(secondMockContextProvider.getInitialContext).not.toHaveBeenCalled();
+    expect(firstMockContextProvider.getNextContext).toHaveBeenCalledWith(
+      expect.objectContaining(nextContextArgument),
+    );
+    expect(secondMockContextProvider.getNextContext).toHaveBeenCalledWith(
+      expect.objectContaining(nextContextArgument),
+    );
+  });
+
+  it('fails to create a next context without a reason', async () => {
+    expect.assertions(7);
+    const mockModel = {
+      getTokenCount: jest.fn().mockRejectedValue('thrown string'),
+    } as unknown as AnaplianModel;
+    const contextProviders = [
+      {
+        provider: <ContextProvider<never, never>>firstMockContextProvider,
+        maximumAllowedTokens: 7000,
+      },
+      {
+        provider: <ContextProvider<never, never>>secondMockContextProvider,
+        maximumAllowedTokens: 7000,
+      },
+    ];
+    const mockSerializer = jest
+      .fn()
+      .mockImplementation((input) => JSON.stringify(input));
+    const contextCreator = new ContextCreator({
+      model: mockModel,
+      contextProviders: contextProviders,
+      serializer: mockSerializer,
+    });
+    const nextContextArgument = {
+      actionResult: 'Nothing was done.',
+      actionTaken: 'nop()',
+      priorContext: {
+        foo: {
+          firstField: '0',
+          secondField: 1,
+        },
+        bar: {
+          firstField: ['0', '1'],
+        },
+      },
+    };
+    await expect(
+      contextCreator.createNextContext(nextContextArgument),
+    ).resolves.toStrictEqual({
+      bar: {
+        ERROR: { code: 'UNHANDLED_ERROR_THROWN', message: undefined },
+        firstField: ['0', '1'],
+      },
+      foo: {
+        ERROR: { code: 'UNHANDLED_ERROR_THROWN', message: undefined },
+        firstField: '0',
+        secondField: 1,
+      },
+    });
     expect(mockSerializer).toHaveBeenCalledTimes(2);
     expect(mockModel.getTokenCount).toHaveBeenCalledTimes(2);
     expect(firstMockContextProvider.getInitialContext).not.toHaveBeenCalled();
