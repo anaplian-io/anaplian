@@ -1,3 +1,10 @@
+# [@anaplian/model-context-size-v1.0.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.0...@anaplian/model-context-size-v1.0.1) (2025-01-03)
+
+
+### Bug Fixes
+
+* **model-context-size:** fixed compatibility for cjs ([21783f5](https://github.com/anaplian-io/anaplian/commit/21783f5d5a8cb7785466054020970c2536410046))
+
 # @anaplian/model-context-size-v1.0.0 (2025-01-02)
 
 

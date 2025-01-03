@@ -1,6 +1,6 @@
 {
   "name": "@anaplian/model-context-size",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Anaplian support library for fetching the context window size for various models",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -21,7 +21,9 @@
     },
     "./package.json": "./package.json"
   },
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "types": "./dist/mjs/index.d.ts",
   "repository": {
     "type": "git",
