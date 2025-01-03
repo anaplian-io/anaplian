@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.5.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.4.0...@anaplian/core-v1.5.0) (2025-01-03)
+
+
+### Features
+
+* **core:** enhanced error handling for context providers ([b70be7c](https://github.com/anaplian-io/anaplian/commit/b70be7cba088a6f07e096e70eb58826a48464c7f))
+
 # [@anaplian/core-v1.4.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.3.1...@anaplian/core-v1.4.0) (2025-01-03)
 
 
