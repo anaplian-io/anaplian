@@ -85,9 +85,9 @@ describe('ActionValidator', () => {
     };
     const result = await validator.validate(action);
     expect(result.valid).toBeFalsy();
-    if (!result.valid) {
+    if (result.valid === false) {
       expect(result.reason).toBe(
-        'Found an example with 2 argument(s) but 1 expected.',
+        'mock: Found an example with 2 argument(s) but 1 expected.',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();
@@ -139,9 +139,9 @@ describe('ActionValidator', () => {
     };
     const result = await validator.validate(action);
     expect(result.valid).toBeFalsy();
-    if (!result.valid) {
+    if (result.valid === false) {
       expect(result.reason).toBe(
-        'Found an example with 1 argument(s) but 0 expected.',
+        'mock: Found an example with 1 argument(s) but 0 expected.',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();
@@ -177,9 +177,9 @@ describe('ActionValidator', () => {
     };
     const result = await validator.validate(action);
     expect(result.valid).toBeFalsy();
-    if (!result.valid) {
+    if (result.valid === false) {
       expect(result.reason).toBe(
-        'Action name "mock action1" does not match regex /^(\\w+)$/',
+        'mock action1: Action name "mock action1" does not match regex /^(\\w+)$/',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();
@@ -211,9 +211,9 @@ describe('ActionValidator', () => {
     };
     const result = await validator.validate(action);
     expect(result.valid).toBeFalsy();
-    if (!result.valid) {
+    if (result.valid === false) {
       expect(result.reason).toBe(
-        'Argument "arg 2" does not match regex /^(\\w+)$/',
+        'mockAction: Argument "arg 2" does not match regex /^(\\w+)$/',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();

@@ -1,13 +1,143 @@
 import { AgentBuilder } from '../agent-builder';
-import { FakeChatModel } from '@langchain/core/utils/testing';
-import { InvalidAgentParametersError } from '../../errors/agent-validation-error';
+import { FakeChatModel, FakeLLM } from '@langchain/core/utils/testing';
+import {
+  InvalidActionError,
+  InvalidAgentParametersError,
+} from '../../errors/agent-validation-error';
+import { ChatOpenAI } from '@langchain/openai';
 
 describe('AgentBuilder', () => {
   it('throws an InvalidAgentParametersError', async () => {
     const builder = new AgentBuilder({
       model: new FakeChatModel({}),
-      roleAssignmentDirective: 'You are an agent. You do agent things',
+      roleAssignmentDirective: 'You are an agent. You do agent things.',
+      modelName: 'a-fake-model',
     });
-    await expect(builder.build()).resolves.toThrow(InvalidAgentParametersError);
+    await expect(builder.build()).rejects.toThrow(InvalidAgentParametersError);
+  });
+
+  it('throws an InvalidActionError', async () => {
+    const builder = new AgentBuilder({
+      model: new FakeChatModel({}),
+      roleAssignmentDirective: 'You are an agent. You do agent things.',
+      modelName: 'a-fake-model',
+    }).addAction({
+      apply: jest.fn(),
+      description: '',
+      name: 'an invalid action name',
+    });
+    await expect(builder.build()).rejects.toThrow(InvalidActionError);
+  });
+
+  it('successfully builds an agent with a fresh context', async () => {
+    const builder = new AgentBuilder({
+      roleAssignmentDirective: '',
+      model: new ChatOpenAI({
+        model: 'gpt-4o-mini',
+        apiKey: 'fake-api-key',
+      }),
+      modelName: 'gpt-4o-mini',
+    })
+      .addAction({
+        apply: jest.fn(),
+        description: 'mock action',
+        name: 'nop',
+      })
+      .setOn('fatalError', jest.fn().mockRejectedValue(new Error()))
+      .addContextProvider(
+        {
+          key: 'foo',
+          description: '',
+          examples: [],
+          fieldDescriptions: {},
+          getInitialContext: jest.fn(),
+          getNextContext: jest.fn(),
+        },
+        1,
+      )
+      .addContextProvider(
+        {
+          key: 'bar',
+          description: '',
+          examples: [],
+          fieldDescriptions: {},
+          getInitialContext: jest.fn(),
+          getNextContext: jest.fn(),
+        },
+        2,
+      );
+    const agent = await builder.build();
+    expect(agent.metadata.modelName).toBe('gpt-4o-mini');
+    expect(agent.metadata.modelContextWindowSize).toBe(128000);
+    expect(agent.metadata.instructionsTokens).toBe(115);
+    expect(agent.metadata.paddingTokens).toBe(6400);
+  });
+
+  it('successfully builds an agent with an existing context', async () => {
+    const builder = new AgentBuilder({
+      roleAssignmentDirective: '',
+      model: new FakeChatModel({}),
+      modelName: 'a-fake-model',
+    })
+      .addAction({
+        apply: jest.fn(),
+        description: 'mock action',
+        name: 'nop',
+      })
+      .setOn('fatalError', jest.fn().mockRejectedValue(new Error()))
+      .addContextProvider(
+        {
+          key: 'foo',
+          description: '',
+          examples: [],
+          fieldDescriptions: {},
+          getInitialContext: jest.fn(),
+          getNextContext: jest.fn(),
+        },
+        1,
+      )
+      .addContextProvider(
+        {
+          key: 'bar',
+          description: '',
+          examples: [],
+          fieldDescriptions: {},
+          getInitialContext: jest.fn(),
+          getNextContext: jest.fn(),
+        },
+        2,
+      )
+      .setContextWindowSize(1000)
+      .setPaddingTokens(100)
+      .setInitialContext({ foo: {}, bar: {} });
+    const agent = await builder.build();
+    expect(agent.metadata.modelName).toBe('a-fake-model');
+    expect(agent.metadata.modelContextWindowSize).toBe(1000);
+    expect(agent.metadata.paddingTokens).toBe(100);
+    expect(agent.metadata.instructionsTokens).toBe(142);
+  });
+
+  it('tests the event handlers', async () => {
+    const builder = new AgentBuilder({
+      model: new FakeLLM({}),
+      modelName: 'a-fake-model',
+      roleAssignmentDirective: 'You are an agent. You do agent things.',
+    });
+    const mockFunction = jest.fn();
+    await Promise.all(
+      Object.values(builder['events']).map(async (event) => await event({})),
+    );
+    expect(mockFunction).not.toHaveBeenCalled();
+    builder
+      .setOn('fatalError', mockFunction)
+      .setOn('afterInitialize', mockFunction)
+      .setOn('afterIterationEnd', mockFunction)
+      .setOn('beforeIterationStart', mockFunction)
+      .setOn('beforeShutdown', mockFunction);
+    expect(mockFunction).not.toHaveBeenCalled();
+    await Promise.all(
+      Object.values(builder['events']).map(async (event) => await event({})),
+    );
+    expect(mockFunction).toHaveBeenCalledTimes(5);
   });
 });

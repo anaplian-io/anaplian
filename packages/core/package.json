@@ -2,19 +2,30 @@
   "name": "@anaplian/core",
   "version": "1.3.1",
   "description": "Anaplian core library for long running AI agent development",
-  "main": "index.js",
   "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/mjs/index.js",
   "scripts": {
     "test": "jest",
     "test:ci": "jest --coverage -ci --reporters=default",
     "clean": "rm -rf dist coverage",
     "semantic-release": "semantic-release",
-    "build": "tsc"
+    "build:mjs": "tsc",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build": "npm run build:cjs && npm run build:mjs"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/mjs/index.js",
+      "types": "./dist/mjs/index.d.ts"
+    },
+    "./package.json": "./package.json"
   },
-  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "types": "./dist/mjs/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anaplian-io/anaplian.git"

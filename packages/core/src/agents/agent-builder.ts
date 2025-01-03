@@ -40,6 +40,10 @@ export interface AgentBuilderProps {
    */
   readonly model: BaseLLM | BaseChatModel;
   /**
+   * The canonical name of the model (e.g. 'gpt-4o-mini').
+   */
+  readonly modelName: string;
+  /**
    * Tells the model who it is, how it should act, and what task it should accomplish.
    */
   readonly roleAssignmentDirective: string;
@@ -173,10 +177,11 @@ export class AgentBuilder {
       roleAssignmentDirective: this.props.roleAssignmentDirective,
     });
     const model = wrapModel(this.props.model, rootFormatter);
-    const modelName = this.props.model.name ?? '';
     const modelContextWindowSize =
       this.contextWindowSize ??
-      (isModelSupported(modelName) ? getModelContextSize(modelName) : 4096);
+      (isModelSupported(this.props.modelName)
+        ? getModelContextSize(this.props.modelName)
+        : 4096);
     const paddingTokens =
       this.paddingTokens ?? Math.trunc(0.05 * modelContextWindowSize);
     const instructionsTokens = await model.getTokenCount(
@@ -189,7 +194,7 @@ export class AgentBuilder {
       provider: contextProvider.provider,
       maximumAllowedTokens: Math.trunc(
         (contextProvider.weight / totalContextProviderWeight) *
-          modelContextWindowSize,
+          (modelContextWindowSize - instructionsTokens - paddingTokens),
       ),
     }));
     const agentOrchestrator = new AgentOrchestrator({
@@ -223,10 +228,11 @@ export class AgentBuilder {
     const agent: AnaplianAgent = {
       metadata: {
         availableActions: this.actions,
+        modelName: this.props.modelName,
+        initialContext: this.initialContext,
         contextProviders,
         instructionsTokens,
         modelContextWindowSize,
-        modelName,
         paddingTokens,
       },
       run: agentOrchestrator.run,

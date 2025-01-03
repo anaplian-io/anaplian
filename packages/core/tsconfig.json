@@ -17,9 +17,8 @@
     "inlineSourceMap": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist",
-    "rootDir": "src"
+    "outDir": "./dist/mjs"
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/dist/", "**/__tests__/**"]
+  "exclude": ["node_modules", "dist", "**/__tests__/**"]
 }
