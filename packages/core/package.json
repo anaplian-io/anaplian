@@ -47,7 +47,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@langchain/core": "^0.3.26"
+    "@langchain/core": ">=0.3.26 <0.4.0"
   },
   "dependencies": {
     "@anaplian/model-context-size": "^1.0.3"
