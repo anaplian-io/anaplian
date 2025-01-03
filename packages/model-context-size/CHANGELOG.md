@@ -1,3 +1,10 @@
+# [@anaplian/model-context-size-v1.0.4](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.3...@anaplian/model-context-size-v1.0.4) (2025-01-03)
+
+
+### Bug Fixes
+
+* **model-context-size:** added models from OpenAI, Google, Anthropic, and AI21 ([56abbb4](https://github.com/anaplian-io/anaplian/commit/56abbb451ba4b56888adcf736fdffd027123cfd6))
+
 # [@anaplian/model-context-size-v1.0.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.2...@anaplian/model-context-size-v1.0.3) (2025-01-03)
 
 
