@@ -1,3 +1,17 @@
+# [@anaplian/core-v1.4.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.3.1...@anaplian/core-v1.4.0) (2025-01-03)
+
+
+### Bug Fixes
+
+* **core:** refactor types in preparation for making agent builder ([8c9110a](https://github.com/anaplian-io/anaplian/commit/8c9110a77ccd6e8d73349613a1429886e988befe))
+* **core:** removed __tests__ directories from build artifact ([08e2cc9](https://github.com/anaplian-io/anaplian/commit/08e2cc9be8382e7697e0852ce0cdbffa08d9ffd5))
+
+
+### Features
+
+* **core:** built agent builder for constructing new agents ([c9a50be](https://github.com/anaplian-io/anaplian/commit/c9a50be9bbb87f2fae99a1f383cb24dce215cef9))
+* **core:** finished building and testing the agent builder ([ffe3f16](https://github.com/anaplian-io/anaplian/commit/ffe3f160117ca4849697309802a53f30b73d6838))
+
 # [@anaplian/core-v1.3.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.3.0...@anaplian/core-v1.3.1) (2025-01-02)
 
 
