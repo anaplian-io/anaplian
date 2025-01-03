@@ -1,3 +1,5 @@
+import { ContextError } from '../common/types';
+
 /**
  * Object for assisting in generating the next partial context.
  */
@@ -11,7 +13,7 @@ export interface GetNextContextProps<
    * context, there was an error processing the last context update.
    */
   readonly priorContext: Record<string, Record<string, unknown>> &
-    Record<KEY, VALUE & { ERROR?: string }>;
+    Record<KEY, VALUE & ContextError>;
 
   /**
    * The action that was last taken by the agent.

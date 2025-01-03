@@ -78,10 +78,19 @@ export class ContextCreator {
               if (error instanceof ContextConstructionError) {
                 return Object.freeze({
                   ...prior.priorContext[bundle.provider.key]!,
-                  ERROR: error.message,
+                  ERROR: {
+                    code: 'CONTEXT_EXCEEDED_MAXIMUM_TOKENS',
+                    message: error.message,
+                  },
                 });
               }
-              throw error;
+              return Object.freeze({
+                ...prior.priorContext[bundle.provider.key]!,
+                ERROR: {
+                  code: 'UNHANDLED_ERROR_THROWN',
+                  message: error.message,
+                },
+              });
             }),
         ]),
       ),
