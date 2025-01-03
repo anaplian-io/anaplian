@@ -50,6 +50,6 @@
     "@langchain/core": "^0.3.26"
   },
   "dependencies": {
-    "@anaplian/model-context-size": "^1.0.0"
+    "@anaplian/model-context-size": "^1.0.3"
   }
 }
