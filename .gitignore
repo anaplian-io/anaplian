@@ -130,3 +130,6 @@ dist
 
 # JetBrains
 .idea/
+
+# ts-auto-guard
+*.guard.ts

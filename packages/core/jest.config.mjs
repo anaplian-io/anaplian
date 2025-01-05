@@ -12,6 +12,7 @@ export default {
     '/dist/',
     '/src/errors/',
     'index.ts',
+    '\\.guard\\.ts$',
   ],
   coverageThreshold: {
     global: {

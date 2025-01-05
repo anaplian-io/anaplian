@@ -8,11 +8,12 @@
   "scripts": {
     "test": "jest",
     "test:ci": "jest --coverage -ci --reporters=default",
-    "clean": "rm -rf dist coverage",
+    "clean": "rm -rf dist coverage src/**/*.guard.ts",
     "semantic-release": "semantic-release",
+    "build:typeguards": "ts-auto-guard src/**/*.ts",
     "build:mjs": "tsc",
     "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build": "npm run build:cjs && npm run build:mjs"
+    "build": "npm run build:typeguards && npm run build:cjs && npm run build:mjs"
   },
   "exports": {
     ".": {
@@ -40,6 +41,7 @@
     "@langchain/openai": "^0.3.16",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
+    "ts-auto-guard": "^5.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2"
   },
