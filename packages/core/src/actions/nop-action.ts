@@ -1,5 +1,8 @@
 import { Action } from './action';
 
+/**
+ * This is the no-operation action. Nothing will be done.
+ */
 export class NopAction implements Action {
   public readonly apply = () => Promise.resolve('No action was taken.');
   public readonly arguments = [];
