@@ -11,7 +11,7 @@ import { AnaplianAgent } from './anaplian-agent';
 import { wrapModel } from '../common/model-wrappers';
 import { RootFormatter } from '../formatters/root-formatter';
 import { ModelOutputParser } from '../parsers/model-output-parser';
-import { XmlModelOutputParser } from '../parsers/xml-model-output-parser';
+import { xmlModelOutputParser } from '../parsers/xml-model-output-parser';
 import { ActionDocumentationFormatter } from '../formatters/action-documentation-formatter';
 import { ContextProviderDocumentationFormatter } from '../formatters/context-provider-documentation-formatter';
 import { ActionExecutor } from '../orchestrators/action-executor';
@@ -158,7 +158,7 @@ export class AgentBuilder {
   public readonly build = async (): Promise<AnaplianAgent> => {
     const serializer = JSON.stringify;
     const leftPadding = '\t';
-    const modelOutputParser: ModelOutputParser = XmlModelOutputParser;
+    const modelOutputParser: ModelOutputParser = xmlModelOutputParser;
     const rootFormatter = new RootFormatter({
       serializer,
       actionDocumentationFormatter: new ActionDocumentationFormatter({
