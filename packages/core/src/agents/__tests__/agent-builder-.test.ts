@@ -69,7 +69,7 @@ describe('AgentBuilder', () => {
     const agent = await builder.build();
     expect(agent.metadata.modelName).toBe('gpt-4o-mini');
     expect(agent.metadata.modelContextWindowSize).toBe(128000);
-    expect(agent.metadata.instructionsTokens).toBe(115);
+    expect(agent.metadata.instructionsTokens).toBe(175);
     expect(agent.metadata.paddingTokens).toBe(6400);
   });
 
@@ -114,7 +114,7 @@ describe('AgentBuilder', () => {
     expect(agent.metadata.modelName).toBe('a-fake-model');
     expect(agent.metadata.modelContextWindowSize).toBe(1000);
     expect(agent.metadata.paddingTokens).toBe(100);
-    expect(agent.metadata.instructionsTokens).toBe(142);
+    expect(agent.metadata.instructionsTokens).toBe(212);
   });
 
   it('tests the event handlers', async () => {

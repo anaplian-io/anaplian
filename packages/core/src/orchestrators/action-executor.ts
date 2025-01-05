@@ -32,7 +32,8 @@ export class ActionExecutor {
     }
     const unsplitArguments = commandParseMatch[2];
     const parsedArguments = (unsplitArguments?.match(argumentRegex) || []).map(
-      (argument) => argument.slice(1, -1).replace(/\\"/g, '"'),
+      (argument) =>
+        argument.slice(1, -1).replace(/\\"/g, '"').replace(/\\n/g, '\n'),
     );
     if (parsedArguments.length !== (selectedAction.arguments?.length || 0)) {
       throw new IncorrectActionUsageError(

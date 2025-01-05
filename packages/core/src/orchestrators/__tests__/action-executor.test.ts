@@ -51,12 +51,12 @@ describe('ActionExecutor', () => {
       availableActions,
     });
     const result = await executor.execute(
-      'echo("\\"Mistake Not...\\"","...my vast oceans of wrath")',
+      'echo("\\"Mistake Not...\\"","...my vast oceans of wrath\\n\\n")',
     );
-    expect(result).toBe('"Mistake Not...";...my vast oceans of wrath');
+    expect(result).toBe('"Mistake Not...";...my vast oceans of wrath\n\n');
     expect(availableActions[0]!.apply).toHaveBeenCalledWith({
-      arg1: '\"Mistake Not...\"',
-      arg2: '...my vast oceans of wrath',
+      arg1: '"Mistake Not..."',
+      arg2: '...my vast oceans of wrath\n\n',
     });
   });
 

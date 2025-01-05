@@ -1,5 +1,5 @@
 import { ModelOutputParser } from '../model-output-parser';
-import { XmlModelOutputParser } from '../xml-model-output-parser';
+import { xmlModelOutputParser } from '../xml-model-output-parser';
 import { IncorrectOutputFormatError } from '../../errors/agent-error';
 
 describe('XmlModelOutputParser', () => {
@@ -17,8 +17,8 @@ describe('XmlModelOutputParser', () => {
   ])(
     'successfully extracts an action from the model output "%s"',
     async (input, expected) => {
-      const modelOutputParser: ModelOutputParser = XmlModelOutputParser;
-      expect(XmlModelOutputParser.modelInstructions).toBeTruthy();
+      const modelOutputParser: ModelOutputParser = xmlModelOutputParser;
+      expect(xmlModelOutputParser.modelInstructions).toBeTruthy();
       expect(await modelOutputParser.parse(input)).toBe(expected);
     },
   );
@@ -32,8 +32,8 @@ describe('XmlModelOutputParser', () => {
   ])(
     'throws an error if an improperly formatted output was generated "%s"',
     async (input) => {
-      const modelOutputParser: ModelOutputParser = XmlModelOutputParser;
-      expect(XmlModelOutputParser.modelInstructions).toBeTruthy();
+      const modelOutputParser: ModelOutputParser = xmlModelOutputParser;
+      expect(xmlModelOutputParser.modelInstructions).toBeTruthy();
       await expect(modelOutputParser.parse(input)).rejects.toThrow(
         IncorrectOutputFormatError,
       );
