@@ -1,3 +1,15 @@
+# [@anaplian/core-v1.6.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.5.0...@anaplian/core-v1.6.0) (2025-01-05)
+
+
+### Bug Fixes
+
+* **core:** disambiguate how to pass quotation marks and new lines into actions ([7c22aa3](https://github.com/anaplian-io/anaplian/commit/7c22aa3b4c22da7dff4fc8a7ae557bfbfe79f01f))
+
+
+### Features
+
+* **core:** implement the nop action ([2457b75](https://github.com/anaplian-io/anaplian/commit/2457b751db7672bfdf1e2004a3ffb4ce28e0136d))
+
 # [@anaplian/core-v1.5.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.4.0...@anaplian/core-v1.5.0) (2025-01-03)
 
 
