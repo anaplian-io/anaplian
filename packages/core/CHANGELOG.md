@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.8.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.7.0...@anaplian/core-v1.8.0) (2025-01-05)
+
+
+### Features
+
+* **core:** implement the "think" action ([261f621](https://github.com/anaplian-io/anaplian/commit/261f621c62ea7854a0ecf3cfb04b38089e266afe))
+
 # [@anaplian/core-v1.7.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.6.0...@anaplian/core-v1.7.0) (2025-01-05)
 
 
