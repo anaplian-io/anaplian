@@ -18,6 +18,7 @@ export interface RootFormatterProps {
 }
 
 const promptTemplate = PromptTemplate.fromTemplate(`
+Role Assignment:
 {roleAssignmentDirective}
 
 Available Actions:

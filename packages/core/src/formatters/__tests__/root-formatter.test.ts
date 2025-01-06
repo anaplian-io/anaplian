@@ -56,6 +56,7 @@ describe('RootFormatter', () => {
     const result = await rootFormatter.formatPartial();
     expect(availableActions[0]?.apply).not.toHaveBeenCalled();
     expect(result).toBe(`
+Role Assignment:
 You are a helpful robot in search of love.
 
 Available Actions:
@@ -87,6 +88,7 @@ Do it. Do it now.
     });
     expect(availableActions[0]?.apply).not.toHaveBeenCalled();
     expect(result).toBe(`
+Role Assignment:
 You are a helpful robot in search of love.
 
 Available Actions:
