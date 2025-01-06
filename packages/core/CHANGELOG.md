@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.9.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.8.0...@anaplian/core-v1.9.0) (2025-01-06)
+
+
+### Features
+
+* **core:** implemented the history context provider ([14fc48f](https://github.com/anaplian-io/anaplian/commit/14fc48f119b3ffaa55c4ffcdb399b70ba5fe1819))
+
 # [@anaplian/core-v1.8.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.7.0...@anaplian/core-v1.8.0) (2025-01-05)
 
 
