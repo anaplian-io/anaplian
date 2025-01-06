@@ -3,7 +3,7 @@ import tseslint from 'typescript-eslint';
 
 export default [
   {
-    ignores: ['**/coverage/', '**/dist/', 'node_modules/', '*.guard.ts'],
+    ignores: ['**/coverage/', '**/dist/', 'node_modules/', '**/*.guard.ts'],
   },
   {
     files: ['**/*.{ts}'],
