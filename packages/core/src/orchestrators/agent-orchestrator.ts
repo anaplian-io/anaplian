@@ -71,8 +71,10 @@ export class AgentOrchestrator {
           .catch(() => {});
         await this.yieldToEventLoop();
       } catch (error) {
-        this.props.events.fatalError(error).catch(() => {});
-        await this.shutdown();
+        await this.props.events
+          .fatalError(error)
+          .catch(() => {})
+          .then(() => this.shutdown());
       }
     }
   };
