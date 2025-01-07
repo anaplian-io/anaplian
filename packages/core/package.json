@@ -53,5 +53,15 @@
   },
   "dependencies": {
     "@anaplian/model-context-size": "^1.0.3"
-  }
+  },
+  "keywords": [
+    "llm",
+    "context",
+    "window",
+    "model",
+    "size",
+    "langchain",
+    "agent",
+    "ai"
+  ]
 }
