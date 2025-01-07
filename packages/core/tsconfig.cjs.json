@@ -5,5 +5,5 @@
     "moduleResolution": null,
     "declaration": false,
     "outDir": "./dist/cjs"
-  },
+  }
 }

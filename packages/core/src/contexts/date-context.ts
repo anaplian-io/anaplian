@@ -22,10 +22,12 @@ export class DateContextProvider
     };
   };
   public readonly key = 'date';
-  public readonly description = 'Gives the current date. Use this as your reference for the current time. This always uses the UTC time zone.';
+  public readonly description =
+    'Gives the current date. Use this as your reference for the current time. This always uses the UTC time zone.';
   public readonly fieldDescriptions = {
     isoDate: 'The current date in ISO format.',
-    epochTimeMilliseconds: 'The current epoch time in milliseconds since January 1, 1970 UTC.',
+    epochTimeMilliseconds:
+      'The current epoch time in milliseconds since January 1, 1970 UTC.',
   };
   public readonly examples = [
     {

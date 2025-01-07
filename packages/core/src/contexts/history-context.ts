@@ -1,7 +1,4 @@
-import {
-  ContextProvider,
-  GetNextContextProps,
-} from './context';
+import { ContextProvider, GetNextContextProps } from './context';
 
 /** @see {isHistoryContext} ts-auto-guard:type-guard */
 export type HistoryContext = {
