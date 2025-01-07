@@ -133,3 +133,6 @@ dist
 
 # ts-auto-guard
 *.guard.ts
+
+# Local
+agent.sh
