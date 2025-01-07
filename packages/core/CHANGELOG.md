@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.10.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.2...@anaplian/core-v1.10.0) (2025-01-07)
+
+
+### Features
+
+* **core:** initial runtime release ([fddfea7](https://github.com/anaplian-io/anaplian/commit/fddfea7d5384982ee2ac1c34db1be487cdcde123))
+
 # [@anaplian/core-v1.9.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.1...@anaplian/core-v1.9.2) (2025-01-07)
 
 
