@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.9.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.0...@anaplian/core-v1.9.1) (2025-01-07)
+
+
+### Bug Fixes
+
+* **core:** moved types exports as this was causing a warning for the bundler ([481d94a](https://github.com/anaplian-io/anaplian/commit/481d94a7973aa97c3729bd1441ff2477c9b11d4d))
+
 # [@anaplian/core-v1.9.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.8.0...@anaplian/core-v1.9.0) (2025-01-06)
 
 
