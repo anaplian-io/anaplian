@@ -1,0 +1,30 @@
+{
+  "name": "@anaplian/djan-seriy",
+  "version": "1.0.0",
+  "description": "A reference AI agent for the Anaplian framework",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "echo",
+    "copy": "cp agent.template.sh agent.sh",
+    "build": "npm run copy && tsc --noEmit && esbuild src/index.ts --outfile=dist/index.js --platform=node --bundle --target=node18 --format=cjs",
+    "clean": "rm -rf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anaplian-io/anaplian.git"
+  },
+  "author": "Anaplian.io",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anaplian-io/anaplian/issues"
+  },
+  "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/djan-seriy",
+  "dependencies": {
+    "@anaplian/core": "^1.9.0",
+    "@langchain/openai": "^0.3.16"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}
