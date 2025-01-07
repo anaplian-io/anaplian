@@ -15,18 +15,18 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build": "npm run build:typeguards && npm run build:cjs && npm run build:mjs"
   },
+  "types": "./dist/mjs/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/mjs/index.d.ts",
       "require": "./dist/cjs/index.js",
-      "import": "./dist/mjs/index.js",
-      "types": "./dist/mjs/index.d.ts"
+      "import": "./dist/mjs/index.js"
     },
     "./package.json": "./package.json"
   },
   "files": [
     "dist/"
   ],
-  "types": "./dist/mjs/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anaplian-io/anaplian.git"
