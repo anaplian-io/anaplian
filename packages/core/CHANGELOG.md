@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.9.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.1...@anaplian/core-v1.9.2) (2025-01-07)
+
+
+### Bug Fixes
+
+* **core:** fatalError event is now executed prior to shut down ([5696c8b](https://github.com/anaplian-io/anaplian/commit/5696c8b0841107d10ddd0f1c6fc76eca1598d7cd))
+
 # [@anaplian/core-v1.9.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.0...@anaplian/core-v1.9.1) (2025-01-07)
 
 
