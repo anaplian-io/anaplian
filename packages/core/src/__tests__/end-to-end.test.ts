@@ -1,37 +1,34 @@
 import { AgentBuilder } from '../agents';
-import { FakeLLM } from '@langchain/core/utils/testing';
+import { FakeListChatModel, FakeLLM } from '@langchain/core/utils/testing';
 import { NopAction, ThinkAction } from '../actions';
-import {
-  DateContextProvider,
-  HistoryContextProvider,
-  isHistoryContext,
-} from '../contexts';
-import { Context } from '../common';
+import { DateContextProvider, HistoryContextProvider } from '../contexts';
 
 describe('@anaplian/core', () => {
   const yieldToEventLoop = async () => {
     await new Promise((accept) => setImmediate(accept));
   };
 
-  it('builds, runs, and shuts down an agent', async () => {
-    expect.assertions(7);
-    let finalContext: Context | undefined;
-    const onFatal = jest.fn(() => Promise.resolve());
-    const onStartIteration = jest.fn(() => Promise.resolve());
-    const onEndIteration = jest.fn(() => Promise.resolve());
-    const onShutdown = jest.fn((context) => {
-      finalContext = context;
-      return Promise.resolve();
-    });
-    const onInitialize = jest.fn(() => Promise.resolve());
-    const fakeLlm = new FakeLLM({
+  it.each([
+    new FakeLLM({
       response:
         '<output>think("This is a thing that I have thought about")</output>',
-    });
-    const invokeSpy = jest.spyOn(fakeLlm, 'invoke');
+    }),
+    new FakeListChatModel({
+      responses: [
+        '<output>think("This is a thing that I have thought about")</output>',
+      ],
+    }),
+  ])('builds, runs, and shuts down an agent', async (model) => {
+    expect.assertions(10);
+    const onFatal = jest.fn().mockReturnValue(Promise.resolve());
+    const onStartIteration = jest.fn().mockReturnValue(Promise.resolve());
+    const onEndIteration = jest.fn().mockReturnValue(Promise.resolve());
+    const onShutdown = jest.fn().mockReturnValue(Promise.resolve());
+    const onInitialize = jest.fn().mockReturnValue(Promise.resolve());
+    const invokeSpy = jest.spyOn(model, 'invoke');
     const agent = await new AgentBuilder({
       modelName: 'gpt-4o-mini',
-      model: fakeLlm,
+      model: model,
       roleAssignmentDirective: 'You are an agent. You do agent things.',
     })
       .addAction(new NopAction())
@@ -50,17 +47,47 @@ describe('@anaplian/core', () => {
     await runPromise;
     expect(onFatal).not.toHaveBeenCalled();
     expect(onStartIteration).toHaveBeenCalledTimes(1);
+    expect(onStartIteration).toHaveBeenCalledWith(
+      expect.objectContaining({
+        history: {
+          records: [],
+        },
+      }),
+    );
     expect(onEndIteration).toHaveBeenCalledTimes(1);
+    expect(onEndIteration).toHaveBeenCalledWith(
+      expect.objectContaining({
+        history: {
+          records: [
+            expect.objectContaining({
+              actionTaken: 'think("This is a thing that I have thought about")',
+              result: 'This is a thing that I have thought about',
+            }),
+          ],
+        },
+      }),
+    );
     expect(onShutdown).toHaveBeenCalledTimes(1);
+    expect(onShutdown).toHaveBeenCalledWith(
+      expect.objectContaining({
+        history: {
+          records: [
+            expect.objectContaining({
+              actionTaken: 'think("This is a thing that I have thought about")',
+              result: 'This is a thing that I have thought about',
+            }),
+          ],
+        },
+      }),
+    );
     expect(onInitialize).toHaveBeenCalledTimes(1);
+    expect(onInitialize).toHaveBeenCalledWith(
+      expect.objectContaining({
+        history: {
+          records: [],
+        },
+      }),
+    );
     expect(invokeSpy).toHaveBeenCalledTimes(1);
-    if (finalContext && isHistoryContext(finalContext.history)) {
-      expect(finalContext.history.records[0]).toStrictEqual(
-        expect.objectContaining({
-          actionTaken: 'think("This is a thing that I have thought about")',
-          result: 'This is a thing that I have thought about',
-        }),
-      );
-    }
   });
 });
