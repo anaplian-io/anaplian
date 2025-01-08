@@ -17,6 +17,7 @@ export interface TavilySearchActionProps {
 /** @see {isTavilySearchResult} ts-auto-guard:type-guard */
 export type TavilySearchResult = {
   readonly resultSummary: string;
+  readonly error?: string;
   readonly results: {
     readonly title: string;
     readonly content: string;
@@ -66,6 +67,15 @@ export class TavilySearchAction implements Action {
         ],
       }),
     },
+    {
+      arguments: ['What is the capital of Oregon?'],
+      result: JSON.stringify(<TavilySearchResult>{
+        resultSummary: '',
+        error:
+          'Error: The search engine threw an error while processing; please try again.',
+        results: [],
+      }),
+    },
   ];
   public readonly apply = async (
     args: Record<string, string>,
@@ -82,6 +92,11 @@ export class TavilySearchAction implements Action {
           content: result.content,
           url: result.url,
         })),
+      }))
+      .catch((error) => ({
+        resultSummary: '',
+        error: `${error}`,
+        results: [],
       }));
     return JSON.stringify(searchResult);
   };
