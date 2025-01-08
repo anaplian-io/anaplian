@@ -51,4 +51,21 @@ describe('TavilySearchAction', () => {
     });
     expect(searchMock).toHaveBeenCalledTimes(1);
   });
+
+  it('handles an error thrown by tavily', async () => {
+    const searchMock = jest
+      .spyOn(tavilyClient, 'search')
+      .mockRejectedValue(new Error('An error happened'));
+    const actionResult = await searchAction.apply({
+      query: 'What is the answer!',
+    });
+    const parsedResult = JSON.parse(actionResult);
+    expect(isTavilySearchResult(parsedResult)).toBeTruthy();
+    expect(parsedResult).toStrictEqual({
+      resultSummary: '',
+      error: 'Error: An error happened',
+      results: [],
+    });
+    expect(searchMock).toHaveBeenCalledTimes(1);
+  });
 });
