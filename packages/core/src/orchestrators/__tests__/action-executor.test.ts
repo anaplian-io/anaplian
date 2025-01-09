@@ -26,7 +26,7 @@ describe('ActionExecutor', () => {
 
   it('successfully executes a command with two arguments', async () => {
     expect.assertions(2);
-    const availableActions: Action[] = [
+    const availableActions: Action<'arg1' | 'arg2'>[] = [
       {
         name: 'echo',
         description: 'Returns its arguments as a list',
@@ -62,7 +62,7 @@ describe('ActionExecutor', () => {
 
   it('throws InvalidSyntaxError', async () => {
     expect.assertions(2);
-    const availableActions: Action[] = [
+    const availableActions: Action<'arg1' | 'arg2'>[] = [
       {
         name: 'echo',
         description: 'Returns its arguments as a list',
@@ -90,7 +90,7 @@ describe('ActionExecutor', () => {
 
   it('throws NoSuchActionError', async () => {
     expect.assertions(2);
-    const availableActions: Action[] = [
+    const availableActions: Action<'arg1' | 'arg2'>[] = [
       {
         name: 'echo',
         description: 'Returns its arguments as a list',
@@ -118,7 +118,7 @@ describe('ActionExecutor', () => {
 
   it('throws IncorrectActionUsageError when no arguments provided', async () => {
     expect.assertions(2);
-    const availableActions: Action[] = [
+    const availableActions: Action<'arg1' | 'arg2'>[] = [
       {
         name: 'echo',
         description: 'Returns its arguments as a list',
@@ -164,7 +164,7 @@ describe('ActionExecutor', () => {
 
   it('propagates InvalidArgumentError when thrown by the action', async () => {
     expect.assertions(2);
-    const availableActions: Action[] = [
+    const availableActions: Action<'first' | 'second'>[] = [
       {
         name: 'echo',
         description: 'Returns its arguments as a list',

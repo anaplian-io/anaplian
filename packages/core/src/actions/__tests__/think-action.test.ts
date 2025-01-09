@@ -1,9 +1,8 @@
-import { Action } from '../action';
 import { ThinkAction } from '../think-action';
 
 describe('ThinkAction', () => {
   it('echoes the input to the output', async () => {
-    const action: Action = new ThinkAction();
+    const action: ThinkAction = new ThinkAction();
     await expect(
       action.apply({
         thought:
