@@ -30,10 +30,11 @@ cd packages/djan-seriy
 npm run build
 ```
 
-4. Modify `./agent.sh` to include your OpenAI API key and your directive to the agent.
+4. Modify `./agent.sh` to include your OpenAI API key, Tavily API key, and your directive to the agent.
 
 ```shell
 export OPEN_AI_API_KEY=#YOUR OPENAI API KEY
+export TAVILY_API_KEY=#YOUR TAVILY API KEY
 export DIRECTIVE=#YOUR AGENT INSTRUCTIONS
 node dist/index.js
 ```

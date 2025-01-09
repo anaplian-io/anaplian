@@ -9,8 +9,12 @@ import {
 } from '@anaplian/core';
 import { ChatOpenAI } from '@langchain/openai';
 import { getEnvironmentVariable } from './environment';
+import { TavilySearchAction, HttpGetAction } from '@anaplian/web';
+import { tavily } from '@tavily/core';
+
 const openAiApiKey = getEnvironmentVariable('OPEN_AI_API_KEY');
 const directive = getEnvironmentVariable('DIRECTIVE');
+const tavilyApiKey = getEnvironmentVariable('TAVILY_API_KEY');
 const modelName = 'gpt-4o-mini';
 let djanSeriy: AnaplianAgent | undefined;
 new AgentBuilder({
@@ -25,6 +29,13 @@ new AgentBuilder({
 })
   .addAction(new NopAction())
   .addAction(new ThinkAction())
+  .addAction(
+    new TavilySearchAction({
+      tavilyClient: tavily({ apiKey: tavilyApiKey }),
+      maxResults: 5,
+    }),
+  )
+  .addAction(new HttpGetAction())
   .addContextProvider(new HistoryContextProvider({}), 99.5)
   .addContextProvider(new DateContextProvider(), 0.5)
   .setOn('beforeShutdown', async (context) => {
