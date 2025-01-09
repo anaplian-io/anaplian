@@ -11,7 +11,7 @@ describe('TavilySearchAction', () => {
   });
 
   it('verifies the example results have the correct shape', () => {
-    expect.assertions(1);
+    expect.assertions(2);
     searchAction.examples.forEach((example) =>
       expect(isTavilySearchResult(JSON.parse(example.result))).toBeTruthy(),
     );
