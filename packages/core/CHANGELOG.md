@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.11.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.10.0...@anaplian/core-v1.11.0) (2025-01-09)
+
+
+### Features
+
+* **core:** firmed up type-checking for Actions ([a238552](https://github.com/anaplian-io/anaplian/commit/a238552d59d4621a4bc35fd30bfe8dbd8f02b5bf))
+
 # [@anaplian/core-v1.10.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.9.2...@anaplian/core-v1.10.0) (2025-01-07)
 
 
