@@ -84,6 +84,7 @@ does, how to use it, and examples.
 
 - `@anaplian/core` - The Anaplian agent runtime.
 - `@anaplian/model-context-size` - Gets the context window size of a model.
+- `@anaplian/web` - Provides agent plugins for interacting with the web.
 - `@anaplian/djan-seriy` (not published) - A runnable example agent.
 
 ## Contributing
