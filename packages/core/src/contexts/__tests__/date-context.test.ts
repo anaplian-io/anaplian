@@ -24,4 +24,12 @@ describe('DateContextProvider', () => {
       epochTimeMilliseconds: 1717966726000,
     });
   });
+
+  it('refreshes the date context', async () => {
+    const contextProvider = new DateContextProvider();
+    await expect(contextProvider.refresh()).resolves.toStrictEqual({
+      isoDate: '2024-06-09T20:58:46.000Z',
+      epochTimeMilliseconds: 1717966726000,
+    });
+  });
 });

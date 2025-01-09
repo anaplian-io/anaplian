@@ -13,7 +13,7 @@ export type ContextError = {
 export type Context = Record<string, Record<string, unknown> & ContextError>;
 export type ContextProviderDocumentation = Omit<
   ContextProvider<string, Record<string, unknown>>,
-  'getInitialContext' | 'getNextContext'
+  'getInitialContext' | 'getNextContext' | 'refresh'
 >;
 export interface AnaplianModel {
   readonly invoke: (context: Context) => Promise<string>;

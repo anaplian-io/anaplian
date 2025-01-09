@@ -44,6 +44,11 @@ export type GetInitialContextProps<
   'priorContext' | 'actionResult' | 'actionTaken'
 >;
 
+export type ContextRefreshProps<
+  KEY extends string,
+  VALUE extends Record<string, unknown>,
+> = Omit<GetNextContextProps<KEY, VALUE>, 'actionResult' | 'actionTaken'>;
+
 /**
  * Interface that must be implemented by all objects that provide context to the agent.
  *
@@ -70,12 +75,21 @@ export interface ContextProvider<
    * The initial context provided. If this promise rejects, this is considered a fatal error. This is only invoked
    * once on initial agent boot.
    *
-   * @param {Omit<GetNextContextProps<KEY extends string, VALUE extends Record<string, unknown>>, 'priorContext'>} props - The
+   * @param {GetInitialContextProps} props - Contains the maximum number of allowed tokens and a utility function for measuring the number of tokens.
    * @returns {Promise<T extends Record<string, unknown>>} - The initial context partial.
    */
   readonly getInitialContext: (
     props: GetInitialContextProps<KEY, VALUE>,
   ) => Promise<VALUE>;
+  /**
+   * This optionally-defined method allows will be called just before the agent takes an action. This is intended for context providers
+   * that are independent of the action that the agent takes. For example, if an agent is running inside a cron job that executes hourly,
+   * the date and time should be updated prior to invoking the model lest the model think it is an hour of date.
+   *
+   * @param {ContextRefreshProps} props - Contains the maximum number of allowed tokens and a utility function for measuring the number of tokens as well as the prior context.
+   * @returns {Promise<T extends Record<string, unknown>>} - The initial context partial.
+   */
+  readonly refresh?: (props: ContextRefreshProps<KEY, VALUE>) => Promise<VALUE>;
   /**
    * Used to assemble the initial context object. This is also referenced to the agent as the name of partial context.
    */
