@@ -53,7 +53,7 @@ export interface AgentBuilderProps {
  * Builds an {@link AnaplianAgent}.
  */
 export class AgentBuilder {
-  private readonly actions: Action[] = [];
+  private readonly actions: Action<string>[] = [];
   private readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
     readonly weight: number;

@@ -6,7 +6,7 @@ import {
 } from '../errors/agent-error';
 
 export interface ActionExecutorProps {
-  readonly availableActions: Action[];
+  readonly availableActions: Action<string>[];
 }
 
 const commandRegex = /^(\w+)\((.*)\)$/;

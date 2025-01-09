@@ -1,13 +1,14 @@
 import { AgentError } from '../errors/agent-error';
+import { ExcludeLast, LastOf, TupleOfStrings } from '../common/types';
 
 /**
  * Defines a single argument that will be passed by the agent.
  */
-export interface ActionArgument {
+export interface ActionArgument<T> {
   /**
    * The name of the argument. This will be available to the agent in documentation.
    */
-  readonly name: string;
+  readonly name: T;
   /**
    * A description of the argument. This will help instruct the agent in how this argument should be used.
    */
@@ -22,10 +23,20 @@ export interface ActionArgument {
   readonly exampleInvalidValues?: string[];
 }
 
+export type UnionToTupleOfActionArguments<
+  U extends string,
+  T extends unknown[] = [],
+> = [U] extends [never]
+  ? T
+  : UnionToTupleOfActionArguments<
+      ExcludeLast<U>,
+      [ActionArgument<LastOf<U>>, ...T]
+    >;
+
 /**
  * Defines an action that can be taken by the agent.
  */
-export interface Action {
+export interface Action<T extends string = never | string> {
   /**
    * The name of the action. This is the literal string that will be invoked by the agent.
    */
@@ -33,7 +44,7 @@ export interface Action {
   /**
    * The set of arguments required to execute this action.
    */
-  readonly arguments?: ActionArgument[];
+  readonly arguments?: UnionToTupleOfActionArguments<T>;
 
   /**
    * A description of this Action that will be provided to the agent.
@@ -44,7 +55,7 @@ export interface Action {
    * Optional examples of inputs and outputs of this action.
    */
   readonly examples?: {
-    readonly arguments?: string[];
+    readonly arguments?: TupleOfStrings<T>;
     readonly result: string;
   }[];
 
@@ -56,20 +67,20 @@ export interface Action {
    * This field is validated to ensure all arguments have been provided.
    * @returns {Promise<string>} - The result of the action.
    */
-  readonly apply: (args: Record<string, string>) => Promise<string>;
+  readonly apply: (args: Record<T, string>) => Promise<string>;
 }
 
 /**
  * Error used by Actions to signal that the agent passed an invalid argument.
  */
 export class InvalidArgumentError extends AgentError {
-  public readonly invalidArgument: ActionArgument;
+  public readonly invalidArgument: ActionArgument<string>;
 
   /**
    *
    * @param {ActionArgument} invalidArgument - The argument passed that was invalid.
    */
-  constructor(invalidArgument: ActionArgument) {
+  constructor(invalidArgument: ActionArgument<string>) {
     super(`Argument ${invalidArgument.name} has an invalid value`);
     this.invalidArgument = invalidArgument;
   }

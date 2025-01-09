@@ -5,8 +5,8 @@ import { ActionValidator } from '../action-validator';
 describe('ActionValidator', () => {
   it('validates successfully when there are no examples', async () => {
     expect.assertions(2);
-    const validator: Validator<Action> = new ActionValidator();
-    const action: Action = {
+    const validator = new ActionValidator();
+    const action: Action<'arg1'> = {
       name: 'mock',
       apply: jest.fn(),
       arguments: [
@@ -24,8 +24,8 @@ describe('ActionValidator', () => {
 
   it('validates successfully when there are correct examples', async () => {
     expect.assertions(2);
-    const validator: Validator<Action> = new ActionValidator();
-    const action: Action = {
+    const validator = new ActionValidator();
+    const action: Action<'arg1'> = {
       name: 'mock',
       apply: jest.fn(),
       arguments: [
@@ -57,8 +57,8 @@ describe('ActionValidator', () => {
 
   it('validates unsuccessfully when there is an incorrect example', async () => {
     expect.assertions(3);
-    const validator: Validator<Action> = new ActionValidator();
-    const action: Action = {
+    const validator = new ActionValidator();
+    const action: Action<'arg1'> = {
       name: 'mock',
       apply: jest.fn(),
       arguments: [
@@ -73,7 +73,7 @@ describe('ActionValidator', () => {
           result: 'this is a result',
         },
         {
-          arguments: ['arg1 value 2', 'arg2 value 1'],
+          arguments: ['arg1 value 2', 'arg2 value 1'] as unknown as [string],
           result: 'this is another result',
         },
         {
@@ -119,8 +119,8 @@ describe('ActionValidator', () => {
 
   it('validates unsuccessfully when there is an incorrect example and no arguments', async () => {
     expect.assertions(3);
-    const validator: Validator<Action> = new ActionValidator();
-    const action: Action = {
+    const validator = new ActionValidator();
+    const action: Action<'arg1'> = {
       name: 'mock',
       apply: jest.fn(),
       examples: [
@@ -149,7 +149,7 @@ describe('ActionValidator', () => {
 
   it('validates unsuccessfully when the action has an invalid name', async () => {
     expect.assertions(3);
-    const validator: Validator<Action> = new ActionValidator();
+    const validator = new ActionValidator();
     const action: Action = {
       name: 'mock action1',
       apply: jest.fn(),
@@ -187,8 +187,8 @@ describe('ActionValidator', () => {
 
   it('validates unsuccessfully when an argument has an invalid name', async () => {
     expect.assertions(3);
-    const validator: Validator<Action> = new ActionValidator();
-    const action: Action = {
+    const validator = new ActionValidator();
+    const action: Action<'arg1' | 'arg 2'> = {
       name: 'mockAction',
       apply: jest.fn(),
       arguments: [

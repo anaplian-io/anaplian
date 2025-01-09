@@ -45,10 +45,10 @@ describe('ActionDocumentationFormatter', () => {
   });
 
   it('formats a search with several examples', async () => {
-    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
+    const formatter = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
-    const action: Action = {
+    const action: Action<'query'> = {
       apply: jest.fn(),
       description: 'Searches the internet with a given input.',
       name: 'search',
@@ -83,10 +83,10 @@ describe('ActionDocumentationFormatter', () => {
   });
 
   it('formats an addition operation with several examples', async () => {
-    const formatter: Formatter<Action> = new ActionDocumentationFormatter({
+    const formatter = new ActionDocumentationFormatter({
       leftPadding: '\t',
     });
-    const action: Action = {
+    const action: Action<'a' | 'b'> = {
       apply: jest.fn(),
       description: 'Adds two numbers together.',
       name: 'add',
