@@ -14,6 +14,8 @@ export class DateContextProvider
 {
   public readonly getNextContext = async (): Promise<DateContext> =>
     this.getInitialContext();
+  public readonly refresh = async (): Promise<DateContext> =>
+    this.getInitialContext();
   public readonly getInitialContext = async (): Promise<DateContext> => {
     const date = new Date();
     return {

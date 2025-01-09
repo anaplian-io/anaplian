@@ -42,6 +42,55 @@ export class ContextCreator {
       ),
     );
 
+  public readonly refreshContext = async (
+    prior: GetNextContextProps<never, never>['priorContext'],
+  ): Promise<Context> =>
+    Object.fromEntries(
+      await Promise.all(
+        this.props.contextProviders.map(async (bundle) => [
+          bundle.provider.key,
+          await bundle.provider
+            .refresh?.({
+              getTokenCount: async (context) =>
+                await this.props.model.getTokenCount(
+                  this.props.serializer(context),
+                ),
+              maximumAllowedTokens: bundle.maximumAllowedTokens,
+              priorContext: prior,
+            })
+            .then(async (newContext) => {
+              const tokensUsed = await this.props.model.getTokenCount(
+                this.props.serializer(newContext),
+              );
+              if (tokensUsed > bundle.maximumAllowedTokens) {
+                throw new ContextConstructionError(
+                  `Context provider "${bundle.provider.key}" used ${tokensUsed} tokens, which exceeds its maximum allocation of ${bundle.maximumAllowedTokens} tokens`,
+                );
+              }
+              return Object.freeze(newContext);
+            })
+            .catch((error) => {
+              if (error instanceof ContextConstructionError) {
+                return Object.freeze({
+                  ...prior[bundle.provider.key]!,
+                  ERROR: {
+                    code: 'CONTEXT_EXCEEDED_MAXIMUM_TOKENS',
+                    message: error.message,
+                  },
+                });
+              }
+              return Object.freeze({
+                ...prior[bundle.provider.key]!,
+                ERROR: {
+                  code: 'UNHANDLED_ERROR_THROWN',
+                  message: error.message,
+                },
+              });
+            }),
+        ]),
+      ),
+    );
+
   public readonly createNextContext = async (
     prior: Omit<
       GetNextContextProps<never, never>,
