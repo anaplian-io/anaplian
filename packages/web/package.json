@@ -1,6 +1,6 @@
 {
   "name": "@anaplian/web",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Contains actions for Anaplian agents for interacting with the web",
   "type": "module",
   "main": "./dist/cjs/index.js",
@@ -61,5 +61,8 @@
   "peerDependencies": {
     "@anaplian/core": ">=1.10.0 <2.0.0",
     "@tavily/core": ">=0.0.2 <1.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
   }
 }

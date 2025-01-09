@@ -44,7 +44,10 @@ export class TavilySearchAction implements Action {
     },
   ];
   public readonly description =
-    'Searches the Internet and results an answer to a query as well as a list of sources with summaries. The exact number of returned results is not guaranteed.';
+    'Searches the Internet and results an answer to a query as well as a list of sources with summaries. ' +
+    'The exact number of returned results is not guaranteed. ' +
+    'Use this action when you want to search the Internet for facts, information, news, or to verify or cross-reference ' +
+    'other information. Remember that not all results may be factually correct and consider the sources carefully.';
   public readonly examples: {
     readonly arguments: string[];
     readonly result: string;
