@@ -1,12 +1,12 @@
-# @anaplian
+# **@anaplian**
 
 **Long-running AI Agents**
 
-## What
+## **What**
 
 Anaplian is an AI agent framework written in TypeScript and designed to interop with LangChain.js.
 
-## Why
+## **Why**
 
 Anaplian is specifically built for _long-running_ AI agents.
 
@@ -31,7 +31,13 @@ Anaplian was written according to the following basic tenets:
 
 Anaplian is written in TypeScript and supported in Node.js 18.x, 20.x, and 22.x.
 
-## Getting Started
+**Intended use cases include:**
+
+- Research and report preparation
+- System monitoring
+- Automated incident response
+
+## **Getting Started**
 
 ```shell
 npm install --save @anaplian/core
@@ -64,30 +70,30 @@ new AgentBuilder({
   .then((agent) => agent.run());
 ```
 
-## Concepts
+## **Concepts**
 
 The two primary components to an Anaplian agent are **Actions** and **Context Providers**.
 
-### Context Providers
+### **Context Providers**
 
 Before the model is invoked, its context is constructed from a set of providers. The context informs the agent about how it will act.
 The `HistoryContextProvider` is arguably the most important provider as without it, the agent will have no knowledge about what it
 has done.
 
-### Actions
+### **Actions**
 
 After the context has been rendered, the agent must select an action to execute. These are actions are selected from a list of
 actions provided when the agent was built. The `Action` interface includes documentation that is provided to the agent about what the action
 does, how to use it, and examples.
 
-## Packages
+## **Packages**
 
 - `@anaplian/core` - The Anaplian agent runtime.
 - `@anaplian/model-context-size` - Gets the context window size of a model.
 - `@anaplian/web` - Provides agent plugins for interacting with the web.
 - `@anaplian/djan-seriy` (not published) - A runnable example agent.
 
-## Contributing
+## **Contributing**
 
 Contributions are always welcome! Please [fork and merge](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) to suggest
 a contribution. The more actions and context providers that are available, the more useful Anaplian agents will be.
