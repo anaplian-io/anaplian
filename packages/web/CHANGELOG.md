@@ -1,3 +1,11 @@
+# [@anaplian/web-v1.0.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.1...@anaplian/web-v1.0.2) (2025-01-09)
+
+
+### Bug Fixes
+
+* **web:** bumped required version of anaplian ([b13cd68](https://github.com/anaplian-io/anaplian/commit/b13cd68206cbd945b9ac20776c5f341ccf6d9a70))
+* **web:** removed unnecessary non-null assertion ([73cccd6](https://github.com/anaplian-io/anaplian/commit/73cccd615dc403490da8d986c9667874c7b26aef))
+
 # [@anaplian/web-v1.0.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.0...@anaplian/web-v1.0.1) (2025-01-09)
 
 

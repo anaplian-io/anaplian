@@ -1,6 +1,6 @@
 {
   "name": "@anaplian/web",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Contains actions for Anaplian agents for interacting with the web",
   "type": "module",
   "main": "./dist/cjs/index.js",
