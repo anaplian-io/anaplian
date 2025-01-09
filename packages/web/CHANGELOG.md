@@ -1,3 +1,10 @@
+# [@anaplian/web-v1.0.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.0...@anaplian/web-v1.0.1) (2025-01-09)
+
+
+### Bug Fixes
+
+* **web:** supported firmer types for Actions ([4c92b05](https://github.com/anaplian-io/anaplian/commit/4c92b05826d905c6bf51ff84561e9ff2206f2fe5))
+
 # @anaplian/web-v1.0.0 (2025-01-09)
 
 
