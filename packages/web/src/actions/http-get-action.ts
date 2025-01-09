@@ -30,10 +30,10 @@ export class HttpGetAction implements Action<'url'> {
     },
   ];
   public readonly apply = async (
-    args: Record<string, string>,
+    args: Record<'url', string>,
   ): Promise<string> =>
     axios
-      .get<string>(args.url!, {
+      .get<string>(args.url, {
         responseType: 'text',
       })
       .then((response) => response.data)

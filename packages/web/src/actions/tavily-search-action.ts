@@ -78,10 +78,10 @@ export class TavilySearchAction implements Action<'query'> {
     },
   ];
   public readonly apply = async (
-    args: Record<string, string>,
+    args: Record<'query', string>,
   ): Promise<string> => {
     const searchResult: TavilySearchResult = await this.props.tavilyClient
-      .search(args.query!, {
+      .search(args.query, {
         maxResults: this.props.maxResults,
         includeAnswer: true,
       })
