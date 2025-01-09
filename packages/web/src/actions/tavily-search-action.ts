@@ -1,4 +1,4 @@
-import { Action, ActionArgument } from '@anaplian/core';
+import { Action } from '@anaplian/core';
 import { tavily } from '@tavily/core';
 
 export type TavilyClient = ReturnType<typeof tavily>;
@@ -28,10 +28,10 @@ export type TavilySearchResult = {
 /**
  * Performs an Internet search using tavily.
  */
-export class TavilySearchAction implements Action {
+export class TavilySearchAction implements Action<'query'> {
   constructor(private readonly props: TavilySearchActionProps) {}
   public readonly name = 'search';
-  public readonly arguments: ActionArgument[] = [
+  public readonly arguments: Action<'query'>['arguments'] = [
     {
       name: 'query',
       description: 'The Internet search query.',
@@ -48,10 +48,7 @@ export class TavilySearchAction implements Action {
     'The exact number of returned results is not guaranteed. ' +
     'Use this action when you want to search the Internet for facts, information, news, or to verify or cross-reference ' +
     'other information. Remember that not all results may be factually correct and consider the sources carefully.';
-  public readonly examples: {
-    readonly arguments: string[];
-    readonly result: string;
-  }[] = [
+  public readonly examples: Action<'query'>['examples'] = [
     {
       arguments: ['What is the capital of Oregon?'],
       result: JSON.stringify(<TavilySearchResult>{

@@ -1,12 +1,12 @@
-import { Action, ActionArgument } from '@anaplian/core';
+import { Action } from '@anaplian/core';
 import axios from 'axios';
 
 /**
  * Performs an HTTP GET request and returns the raw content.
  */
-export class HttpGetAction implements Action {
+export class HttpGetAction implements Action<'url'> {
   public readonly name = 'httpGet';
-  public readonly arguments: ActionArgument[] = [
+  public readonly arguments: Action<'url'>['arguments'] = [
     {
       name: 'url',
       description: 'The address to get including protocol.',
@@ -19,10 +19,7 @@ export class HttpGetAction implements Action {
   ];
   public readonly description =
     'Performs an HTTP GET request to the desired URL. Use this action when you want to fetch the raw content from web site.';
-  public readonly examples: {
-    readonly arguments: string[];
-    readonly result: string;
-  }[] = [
+  public readonly examples: Action<'url'>['examples'] = [
     {
       arguments: ['https://example.com/index.html'],
       result: '<htmL lang="en"><body><p>Some content</p></body></htmL>',
