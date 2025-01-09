@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.12.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.11.0...@anaplian/core-v1.12.0) (2025-01-09)
+
+
+### Features
+
+* **core:** allow context providers to optionally perform a context refresh ([e79a78b](https://github.com/anaplian-io/anaplian/commit/e79a78b5dfdecc4fe9264b79e52ae6ba3c8c14a7))
+
 # [@anaplian/core-v1.11.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.10.0...@anaplian/core-v1.11.0) (2025-01-09)
 
 
