@@ -39,6 +39,9 @@ export class AgentOrchestrator {
         this.props.events
           .beforeIterationStart(this.currentContext)
           .catch(() => {});
+        this.currentContext = await this.props.contextCreator.refreshContext(
+          this.currentContext,
+        );
         const rawModelOutput = await this.props.model.invoke(
           this.currentContext,
         );

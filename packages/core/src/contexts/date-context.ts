@@ -12,9 +12,11 @@ export type DateContext = {
 export class DateContextProvider
   implements ContextProvider<'date', DateContext>
 {
-  public readonly getNextContext = async (): Promise<DateContext> =>
-    this.getInitialContext();
-  public readonly refresh = async (): Promise<DateContext> =>
+  public readonly getNextContext: ContextProvider<
+    'date',
+    DateContext
+  >['getNextContext'] = async (props) => props.priorContext.date;
+  public readonly refresh = (): Promise<DateContext> =>
     this.getInitialContext();
   public readonly getInitialContext = async (): Promise<DateContext> => {
     const date = new Date();
