@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.12.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.0...@anaplian/core-v1.12.1) (2025-01-10)
+
+
+### Bug Fixes
+
+* **core:** call context refresh prior to invoking the model ([3e58d41](https://github.com/anaplian-io/anaplian/commit/3e58d411d1127a7ef3210e1c21caabe6781604b9))
+
 # [@anaplian/core-v1.12.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.11.0...@anaplian/core-v1.12.0) (2025-01-09)
 
 
