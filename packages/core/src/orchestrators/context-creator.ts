@@ -44,8 +44,8 @@ export class ContextCreator {
 
   public readonly refreshContext = async (
     prior: GetNextContextProps<never, never>['priorContext'],
-  ): Promise<Context> =>
-    Object.fromEntries(
+  ): Promise<Context> => {
+    const refreshedContext: Context = Object.fromEntries(
       await Promise.all(
         this.props.contextProviders.map(async (bundle) => [
           bundle.provider.key,
@@ -88,8 +88,13 @@ export class ContextCreator {
               });
             }),
         ]),
-      ),
+      ).then((tuples) => tuples.filter((tuple) => !!tuple[1])),
     );
+    return {
+      ...prior,
+      ...refreshedContext,
+    };
+  };
 
   public readonly createNextContext = async (
     prior: Omit<

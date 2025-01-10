@@ -17,11 +17,24 @@ describe('DateContextProvider', () => {
     });
   });
 
-  it('gets the next date context', async () => {
+  it('gets echoes back the old date on get next date', async () => {
     const contextProvider = new DateContextProvider();
-    await expect(contextProvider.getNextContext()).resolves.toStrictEqual({
-      isoDate: '2024-06-09T20:58:46.000Z',
-      epochTimeMilliseconds: 1717966726000,
+    await expect(
+      contextProvider.getNextContext({
+        actionResult: '',
+        actionTaken: '',
+        getTokenCount: jest.fn().mockRejectedValue(new Error()),
+        maximumAllowedTokens: 0,
+        priorContext: {
+          date: {
+            epochTimeMilliseconds: 10,
+            isoDate: 'January 1, 1970',
+          },
+        },
+      }),
+    ).resolves.toStrictEqual({
+      epochTimeMilliseconds: 10,
+      isoDate: 'January 1, 1970',
     });
   });
 

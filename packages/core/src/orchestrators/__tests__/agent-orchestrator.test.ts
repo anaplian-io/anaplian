@@ -30,6 +30,7 @@ describe('AgentOrchestrator', () => {
     mockContextCreator = {
       createInitialContext: jest.fn().mockResolvedValue({ initial: 'context' }),
       createNextContext: jest.fn().mockResolvedValue({ next: 'context' }),
+      refreshContext: jest.fn().mockResolvedValue({ refresh: 'context' }),
     } as unknown as jest.Mocked<ContextCreator>;
 
     mockActionExecutor = {
@@ -74,7 +75,7 @@ describe('AgentOrchestrator', () => {
       expect(mockEvents.beforeIterationStart).toHaveBeenCalledWith({
         initial: 'context',
       });
-      expect(mockModel.invoke).toHaveBeenCalledWith({ initial: 'context' });
+      expect(mockModel.invoke).toHaveBeenCalledWith({ refresh: 'context' });
       expect(mockOutputParser.parse).toHaveBeenCalledWith(
         'mocked model output',
       );
@@ -82,7 +83,7 @@ describe('AgentOrchestrator', () => {
       expect(mockContextCreator.createNextContext).toHaveBeenCalledWith({
         actionResult: 'mocked action result',
         actionTaken: 'parsed action',
-        priorContext: { initial: 'context' },
+        priorContext: { refresh: 'context' },
       });
 
       expect(mockEvents.afterIterationEnd).toHaveBeenCalledWith({
@@ -122,9 +123,7 @@ describe('AgentOrchestrator', () => {
         },
       });
       expect(mockModel.invoke).toHaveBeenCalledWith({
-        someCoolContext: {
-          value: 'initial value',
-        },
+        refresh: 'context',
       });
       expect(mockOutputParser.parse).toHaveBeenCalledWith(
         'mocked model output',
@@ -134,9 +133,7 @@ describe('AgentOrchestrator', () => {
         actionResult: 'mocked action result',
         actionTaken: 'parsed action',
         priorContext: {
-          someCoolContext: {
-            value: 'initial value',
-          },
+          refresh: 'context',
         },
       });
 
@@ -155,7 +152,7 @@ describe('AgentOrchestrator', () => {
 
       expect(mockEvents.fatalError).toHaveBeenCalledWith(expect.any(Error));
       expect(mockEvents.beforeShutdown).toHaveBeenCalledWith({
-        initial: 'context',
+        refresh: 'context',
       });
     });
 
@@ -170,7 +167,7 @@ describe('AgentOrchestrator', () => {
       expect(mockContextCreator.createNextContext).toHaveBeenCalledWith({
         actionResult: 'ERROR: Mock Agent Error',
         actionTaken: 'mocked model output',
-        priorContext: { initial: 'context' },
+        priorContext: { refresh: 'context' },
       });
 
       await orchestrator.shutdown();
