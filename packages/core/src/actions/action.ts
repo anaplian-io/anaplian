@@ -36,7 +36,7 @@ export type UnionToTupleOfActionArguments<
 /**
  * Defines an action that can be taken by the agent.
  */
-export interface Action<T extends string = never | string> {
+export interface Action<ARGUMENT_NAMES extends string = never | string> {
   /**
    * The name of the action. This is the literal string that will be invoked by the agent.
    */
@@ -44,7 +44,7 @@ export interface Action<T extends string = never | string> {
   /**
    * The set of arguments required to execute this action.
    */
-  readonly arguments?: UnionToTupleOfActionArguments<T>;
+  readonly arguments?: UnionToTupleOfActionArguments<ARGUMENT_NAMES>;
 
   /**
    * A description of this Action that will be provided to the agent.
@@ -55,7 +55,7 @@ export interface Action<T extends string = never | string> {
    * Optional examples of inputs and outputs of this action.
    */
   readonly examples?: {
-    readonly arguments?: TupleOfStrings<T>;
+    readonly arguments?: TupleOfStrings<ARGUMENT_NAMES>;
     readonly result: string;
   }[];
 
@@ -67,7 +67,7 @@ export interface Action<T extends string = never | string> {
    * This field is validated to ensure all arguments have been provided.
    * @returns {Promise<string>} - The result of the action.
    */
-  readonly apply: (args: Record<T, string>) => Promise<string>;
+  readonly apply: (args: Record<ARGUMENT_NAMES, string>) => Promise<string>;
 }
 
 /**
