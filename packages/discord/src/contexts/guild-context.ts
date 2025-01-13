@@ -21,6 +21,7 @@ export type GuildContext = {
 
 /**
  * Provides all guilds and their corresponding snowflakes to the agent.
+ * This context provider reads from the cache.
  */
 export class GuildContextProvider
   implements ContextProvider<'discordGuilds', GuildContext>
