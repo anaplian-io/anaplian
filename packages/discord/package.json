@@ -58,5 +58,6 @@
   "peerDependencies": {
     "@anaplian/core": "~1.12.1",
     "discord.js": "~14.17.3"
-  }
+  },
+  "sideEffects": false
 }
