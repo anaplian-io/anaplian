@@ -1,3 +1,12 @@
+# [@anaplian/core-v1.12.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.1...@anaplian/core-v1.12.2) (2025-01-14)
+
+
+### Bug Fixes
+
+* **core:** fixed an issue where addAction would not accept actions with multiple args ([729bbbe](https://github.com/anaplian-io/anaplian/commit/729bbbeee8ae980d749c2640d3414580f8d1d5ad))
+* **core:** help with tree shaking by setting sideEffects to false ([35cd45c](https://github.com/anaplian-io/anaplian/commit/35cd45cb06992e5403759a263e3c4f189bf40a32))
+* **core:** improved type hints to indicate how actions should be created ([54f7c66](https://github.com/anaplian-io/anaplian/commit/54f7c6640d1f82e7539d1cbd8d6fe47bdc03ad53))
+
 # [@anaplian/core-v1.12.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.0...@anaplian/core-v1.12.1) (2025-01-10)
 
 
