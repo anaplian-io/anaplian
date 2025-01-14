@@ -1,4 +1,4 @@
-import { Client } from 'discord.js';
+import { ChannelType, Client } from 'discord.js';
 import { Action, ActionArgument } from '@anaplian/core';
 
 /**
@@ -75,7 +75,9 @@ export class ListChannelsAction implements Action<'guildSnowflake'> {
       .then((channelsCollection) =>
         JSON.stringify({
           channels: channelsCollection
-            .filter((channel) => !!channel && channel.isTextBased())
+            .filter(
+              (channel) => !!channel && channel.type === ChannelType.GuildText,
+            )
             .map((channel) => ({
               name: channel?.name,
               snowflake: channel?.id,

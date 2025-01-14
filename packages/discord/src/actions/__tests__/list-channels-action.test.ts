@@ -1,20 +1,24 @@
-import { Client, Collection } from 'discord.js';
+import { ChannelType, Client, Collection } from 'discord.js';
 import { ListChannelsAction } from '../list-channels-action';
 import { isListChannelsResult } from '../list-channels-action.guard';
 
 describe('ListChannelsAction', () => {
   it('fetches a list of channels', async () => {
     const dummyChannels = [
-      { id: '123456789012345678', name: 'general', isTextBased: () => true },
+      {
+        id: '123456789012345678',
+        name: 'general',
+        type: ChannelType.GuildText,
+      },
       {
         id: '987654321098765432',
         name: 'bot-commands',
-        isTextBased: () => true,
+        type: ChannelType.GuildText,
       },
       {
         id: '112233445566778899',
         name: 'voice-channel',
-        isTextBased: () => false,
+        type: ChannelType.GuildVoice,
       },
       {
         id: 'fake',
