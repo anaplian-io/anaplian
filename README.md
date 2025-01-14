@@ -36,6 +36,7 @@ Anaplian is written in TypeScript and supported in Node.js 18.x, 20.x, and 22.x.
 - Research and report preparation
 - System monitoring
 - Automated incident response
+- Web crawlers
 
 ## **Getting Started**
 
@@ -90,7 +91,8 @@ does, how to use it, and examples.
 
 - `@anaplian/core` - The Anaplian agent runtime.
 - `@anaplian/model-context-size` - Gets the context window size of a model.
-- `@anaplian/web` - Provides agent plugins for interacting with the web.
+- `@anaplian/web` - Agent actions for interacting with the web.
+- `@anaplian/discord` - Agent actions and context providers for interacting with Discord.
 - `@anaplian/djan-seriy` (not published) - A runnable example agent.
 
 ## **Contributing**
