@@ -53,7 +53,7 @@ export interface AgentBuilderProps {
  * Builds an {@link AnaplianAgent}.
  */
 export class AgentBuilder {
-  private readonly actions: Action<string>[] = [];
+  private readonly actions: Action[] = [];
   private readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
     readonly weight: number;
@@ -76,8 +76,10 @@ export class AgentBuilder {
    *
    * @param action {Action} - The Action to add.
    */
-  public readonly addAction = (action: Action): this => {
-    this.actions.push(action);
+  public readonly addAction = <T extends string = never | string>(
+    action: Action<T>,
+  ): this => {
+    this.actions.push(action as Action);
     return this;
   };
 
