@@ -15,13 +15,18 @@ export interface MessageChannelActionProps {
  * Sends a message to a channel. The channel is assumed to be cached.
  */
 export class MessageChannelAction
-  implements Action<'channelSnowflake' | 'message'>
+  implements Action<'message' | 'channelSnowflake'>
 {
   constructor(private readonly props: MessageChannelActionProps) {}
   public readonly name = 'messageChannel';
   public readonly arguments: Action<
-    'channelSnowflake' | 'message'
+    'message' | 'channelSnowflake'
   >['arguments'] = [
+    {
+      name: 'message',
+      description:
+        'The text of the message that will be sent. Double quotes and newlines should be escaped.',
+    },
     {
       name: 'channelSnowflake',
       description:
@@ -30,16 +35,11 @@ export class MessageChannelAction
       exampleValidValues: ['3885535482831922002'],
       exampleInvalidValues: ['#general', 'general'],
     },
-    {
-      name: 'message',
-      description:
-        'The text of the message that will be sent. Double quotes and newlines should be escaped.',
-    },
   ];
   public readonly description =
     'Sends a message to a discord channel. ' +
     'The channel should be a text-only channel that you have access to.';
-  public readonly examples: Action<'channelSnowflake' | 'message'>['examples'] =
+  public readonly examples: Action<'message' | 'channelSnowflake'>['examples'] =
     [
       {
         arguments: ['3885535482831922002', 'How is everyone doing today?'],
@@ -56,7 +56,7 @@ export class MessageChannelAction
       },
     ];
   public readonly apply = async (
-    args: Record<'channelSnowflake' | 'message', string>,
+    args: Record<'message' | 'channelSnowflake', string>,
   ): Promise<string> => {
     const channel = this.props.discordClient.channels.cache.get(
       args.channelSnowflake,
