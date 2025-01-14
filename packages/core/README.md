@@ -36,6 +36,7 @@ Anaplian is written in TypeScript and supported in Node.js 18.x, 20.x, and 22.x.
 - Research and report preparation
 - System monitoring
 - Automated incident response
+- Web crawlers
 
 ## **Getting Started**
 

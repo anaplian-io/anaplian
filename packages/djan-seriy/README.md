@@ -4,7 +4,7 @@ Djan-Seriy is an example agent written using the Anaplian agent framework.
 
 ## Features
 
-Djan-Seriy illustrates the following features of Anaplian:
+Djan-Seriy illustrates the following behaviors:
 
 - Uses event handlers to log the agent's outputs and action results.
 - Sets a shutdown hook to gracefully shut down the agent on `CTRL + c`.
@@ -30,17 +30,18 @@ cd packages/djan-seriy
 npm run build
 ```
 
-4. Modify `./agent.sh` to include your OpenAI API key, Tavily API key, and your directive to the agent.
+4. Make a copy of `./template.env` called `.env` and fill it in with API keys for Tavily, Discord, and OpenAI as well
+   as your role assignment directive to the agent.
 
-```shell
-export OPEN_AI_API_KEY=#YOUR OPENAI API KEY
-export TAVILY_API_KEY=#YOUR TAVILY API KEY
-export DIRECTIVE=#YOUR AGENT INSTRUCTIONS
-node dist/index.js
+```.dotenv
+OPEN_AI_API_KEY="YOUR OPENAI API KEY"
+TAVILY_API_KEY="YOUR TAVILY API KEY"
+DISCORD_BOT_TOKEN="YOUR DISCORD BOT TOKEN"
+DIRECTIVE="YOUR AGENT INSTRUCTIONS"
 ```
 
 5. Start the agent.
 
 ```shell
-bash agent.sh
+npm start
 ```
