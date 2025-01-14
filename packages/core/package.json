@@ -63,5 +63,6 @@
     "langchain",
     "agent",
     "ai"
-  ]
+  ],
+  "sideEffects": false
 }
