@@ -1,4 +1,4 @@
-# **@anaplian**
+# **@anaplian/core**
 
 **Long-running AI Agents**
 
