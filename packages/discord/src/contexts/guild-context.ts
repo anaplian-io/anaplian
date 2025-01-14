@@ -32,7 +32,7 @@ export class GuildContextProvider
     GuildContext
   >['getNextContext'] = async (props) => props.priorContext.discordGuilds;
   public readonly getInitialContext: ContextProvider<
-    'guilds',
+    'discordGuilds',
     GuildContext
   >['getInitialContext'] = async () => ({
     guilds: this.props.discordClient.guilds.cache.map((guild, snowflake) => ({
@@ -40,8 +40,10 @@ export class GuildContextProvider
       snowflake,
     })),
   });
-  public readonly refresh: ContextProvider<'discordGuilds', GuildContext>['refresh'] =
-    (props) => this.getInitialContext(props);
+  public readonly refresh: ContextProvider<
+    'discordGuilds',
+    GuildContext
+  >['refresh'] = (props) => this.getInitialContext(props);
   public readonly key = 'discordGuilds';
   public readonly description =
     'Provides a list of Discords servers (known as "guilds" in the Discord API) that ' +
@@ -50,7 +52,7 @@ export class GuildContextProvider
     guilds: 'An array of guilds. Contains the guild name and its snowflake.',
   };
   public readonly examples: ContextProvider<
-    'guilds',
+    'discordGuilds',
     GuildContext
   >['examples'] = [
     {
