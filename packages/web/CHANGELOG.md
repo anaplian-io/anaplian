@@ -5,6 +5,13 @@
 
 * **web:** help with tree shaking by setting sideEffects to false ([897e477](https://github.com/anaplian-io/anaplian/commit/897e477bf3d8bc1c4287da59916a641657962d42))
 
+# [@anaplian/web-v1.0.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.2...@anaplian/web-v1.0.3) (2025-01-14)
+
+
+### Bug Fixes
+
+* **web:** help with tree shaking by setting sideEffects to false ([897e477](https://github.com/anaplian-io/anaplian/commit/897e477bf3d8bc1c4287da59916a641657962d42))
+
 # [@anaplian/web-v1.0.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.1...@anaplian/web-v1.0.2) (2025-01-09)
 
 
