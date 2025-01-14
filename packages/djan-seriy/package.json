@@ -6,9 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo",
-    "copy": "cp agent.template.sh agent.sh",
-    "build": "npm run copy && tsc --noEmit && esbuild src/index.ts --outfile=dist/index.js --platform=node --bundle --target=node18 --format=cjs --minify",
-    "clean": "rm -rf dist"
+    "build": "tsc --noEmit && esbuild src/index.ts --outfile=dist/index.js --platform=node --bundle --target=node18 --format=cjs",
+    "clean": "rm -rf dist",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,11 @@
   },
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/djan-seriy",
   "dependencies": {
-    "@anaplian/core": "^1.9.0",
-    "@anaplian/web": "^1.0.0",
-    "@langchain/openai": "^0.3.16"
+    "@anaplian/core": "*",
+    "@anaplian/discord": "*",
+    "@anaplian/web": "*",
+    "@langchain/openai": "*",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "esbuild": "^0.24.2"
