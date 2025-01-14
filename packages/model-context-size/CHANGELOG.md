@@ -1,3 +1,10 @@
+# [@anaplian/model-context-size-v1.0.6](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.5...@anaplian/model-context-size-v1.0.6) (2025-01-14)
+
+
+### Bug Fixes
+
+* **model-context-size:** help with tree shaking by setting sideEffects to false ([817400f](https://github.com/anaplian-io/anaplian/commit/817400f4dcff3496f1197ab3e4e7665dfb51d8d3))
+
 # [@anaplian/model-context-size-v1.0.5](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.4...@anaplian/model-context-size-v1.0.5) (2025-01-07)
 
 
