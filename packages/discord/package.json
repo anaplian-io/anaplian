@@ -43,7 +43,11 @@
     "window",
     "model",
     "langchain",
-    "discord"
+    "discord",
+    "agent",
+    "ai",
+    "channel",
+    "guild"
   ],
   "devDependencies": {
     "@types/jest": "^29.5.14",
