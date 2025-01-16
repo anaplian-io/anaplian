@@ -1,3 +1,15 @@
+# [@anaplian/web-v1.1.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.2...@anaplian/web-v1.1.0) (2025-01-16)
+
+
+### Bug Fixes
+
+* **web:** help with tree shaking by setting sideEffects to false ([897e477](https://github.com/anaplian-io/anaplian/commit/897e477bf3d8bc1c4287da59916a641657962d42))
+
+
+### Features
+
+* **web:** added an action and context provider for providing realtime stock quotes ([#66](https://github.com/anaplian-io/anaplian/issues/66)) ([f0e439e](https://github.com/anaplian-io/anaplian/commit/f0e439e1492e82807e9b07ca875ebc0967f46714))
+
 # [@anaplian/web-v1.0.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.2...@anaplian/web-v1.0.3) (2025-01-14)
 
 
