@@ -1,3 +1,15 @@
+# [@anaplian/web-v1.2.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.1.0...@anaplian/web-v1.2.0) (2025-01-18)
+
+
+### Bug Fixes
+
+* **web:** fixed exports and argument declaration ([0866973](https://github.com/anaplian-io/anaplian/commit/0866973cafb0b3165661078d42502dbfd2bf1b38))
+
+
+### Features
+
+* **web:** added an action for fetching web pages as markdown ([847f63f](https://github.com/anaplian-io/anaplian/commit/847f63fc8c8203c7a5fb5ee7306964ccf7211464))
+
 # [@anaplian/web-v1.1.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.0.2...@anaplian/web-v1.1.0) (2025-01-16)
 
 
