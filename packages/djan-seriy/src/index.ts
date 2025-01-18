@@ -9,7 +9,7 @@ import {
 } from '@anaplian/core';
 import { ChatOpenAI } from '@langchain/openai';
 import { getEnvironmentVariable } from './environment';
-import { TavilySearchAction, HttpGetAction } from '@anaplian/web';
+import { HttpGetMarkdownAction, TavilySearchAction } from '@anaplian/web';
 import { tavily } from '@tavily/core';
 import { Client, GatewayIntentBits } from 'discord.js';
 import 'dotenv/config';
@@ -60,7 +60,7 @@ discordClient
           discordClient,
         }),
       )
-      .addAction(new HttpGetAction())
+      .addAction(new HttpGetMarkdownAction({}))
       .addContextProvider(new HistoryContextProvider({}), 97.5)
       .addContextProvider(new DateContextProvider(), 0.5)
       .addContextProvider(
