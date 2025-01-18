@@ -23,6 +23,17 @@ Allows an Anaplian agent to perform a GET request on a web page.
 **Parameters**
 None.
 
+#### `HttpGetMarkdownAction`
+
+**Description**
+
+Allows an Anaplian agent to perform a GET request on a web page. HTML pages will be converted to markdown.
+
+**Parameters**
+
+- `turndownService` - (Optional) A TurndownService for converting HTML to markdown (see `turndown` and `@types/turndown`).
+- `parentAction` - (Optional) An HttpGetAction for customizing request calls.
+
 #### `TavilySearchAction`
 
 **Description**
