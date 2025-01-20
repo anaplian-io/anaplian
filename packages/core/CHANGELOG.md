@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.12.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.2...@anaplian/core-v1.12.3) (2025-01-20)
+
+
+### Bug Fixes
+
+* **core:** ensure that the immediate is cleared up ([7cf7ef5](https://github.com/anaplian-io/anaplian/commit/7cf7ef5d4257987c1b68e829c5c99202da363046))
+
 # [@anaplian/core-v1.12.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.1...@anaplian/core-v1.12.2) (2025-01-14)
 
 
