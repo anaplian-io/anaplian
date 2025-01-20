@@ -23,6 +23,7 @@ export interface AgentOrchestratorProps {
 export class AgentOrchestrator {
   private shuttingDown: boolean = false;
   private currentContext: Context = {};
+  private eventLoopImmediate: ReturnType<typeof setImmediate> | undefined;
   constructor(private readonly props: AgentOrchestratorProps) {}
 
   public readonly run: AnaplianAgent['run'] = async () => {
@@ -91,7 +92,10 @@ export class AgentOrchestrator {
     }
   };
 
-  private readonly yieldToEventLoop = async () => {
-    await new Promise((accept) => setImmediate(accept));
+  private readonly yieldToEventLoop = () => {
+    clearImmediate(this.eventLoopImmediate);
+    return new Promise((accept) => {
+      this.eventLoopImmediate = setImmediate(accept);
+    });
   };
 }
