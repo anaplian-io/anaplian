@@ -47,7 +47,8 @@
     "agent",
     "ai",
     "channel",
-    "guild"
+    "guild",
+    "bot"
   ],
   "devDependencies": {
     "@anaplian/core": "^1.12.3",
