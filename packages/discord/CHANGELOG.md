@@ -4,6 +4,14 @@
 ### Bug Fixes
 
 * **discord:** fixed peerDependency version ranges ([54f171c](https://github.com/anaplian-io/anaplian/commit/54f171c6de747b9d388e54dcaed5e72a6b375d8a))
+* **discord:** updated keywords ([0eff3de](https://github.com/anaplian-io/anaplian/commit/0eff3deefce4e6228431e4bc0877efb73f90e67e))
+
+# [@anaplian/discord-v1.0.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/discord-v1.0.0...@anaplian/discord-v1.0.1) (2025-01-22)
+
+
+### Bug Fixes
+
+* **discord:** fixed peerDependency version ranges ([54f171c](https://github.com/anaplian-io/anaplian/commit/54f171c6de747b9d388e54dcaed5e72a6b375d8a))
 
 # @anaplian/discord-v1.0.0 (2025-01-14)
 
