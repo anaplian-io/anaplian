@@ -1,3 +1,10 @@
+# [@anaplian/web-v1.2.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.2.0...@anaplian/web-v1.2.1) (2025-01-22)
+
+
+### Bug Fixes
+
+* **web:** fixed peerDependency version ranges ([3049bfd](https://github.com/anaplian-io/anaplian/commit/3049bfdb32903c95ab22692fbf4bb67a37ca5438))
+
 # [@anaplian/web-v1.2.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.1.0...@anaplian/web-v1.2.0) (2025-01-18)
 
 
