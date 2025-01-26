@@ -1,44 +1,45 @@
-import { BaseLLM } from '@langchain/core/language_models/llms';
-import { AnaplianModel } from './types';
+import { AnaplianModel, isDefined } from './types';
 import { RootFormatter } from '../formatters/root-formatter';
-import { BaseChatModel } from '@langchain/core/language_models/chat_models';
 import { HumanMessage, SystemMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
-import { isChatModel } from '@langchain/core/example_selectors';
+import { BaseLanguageModel } from '@langchain/core/language_models/base';
 
-const wrapBaseLLM = (
-  baseLLM: BaseLLM,
-  rootFormatter: RootFormatter,
-): AnaplianModel => ({
-  invoke: (context) =>
-    rootFormatter
-      .format(context)
-      .then((formattedPrompt) => baseLLM.invoke(formattedPrompt)),
-  getTokenCount: (content) => baseLLM.getNumTokens(content),
-});
-
-const wrapChatModel = (
-  chatModel: BaseChatModel,
+export const wrapModel = (
+  model: BaseLanguageModel,
   rootFormatter: RootFormatter,
 ): AnaplianModel => ({
   invoke: async (context) => {
     const formattedPartialPrompt = rootFormatter.formatPartial();
     const serializedContext = rootFormatter.serializeContext(context);
+    const contextImages: HumanMessage[] = Object.values(context)
+      .map((context) => context.IMAGES)
+      .filter(isDefined)
+      .flatMap((imageCollection) =>
+        imageCollection.map(
+          (imageDefinition) =>
+            new HumanMessage({
+              content: [
+                {
+                  type: 'text',
+                  text: imageDefinition.annotation,
+                },
+                {
+                  type: 'image_url',
+                  image_url: {
+                    detail: imageDefinition.imageDetail,
+                    url: `data:image/${imageDefinition.imageType};base64,${imageDefinition.imageContent.toString('base64')}`,
+                  },
+                },
+              ],
+            }),
+        ),
+      );
     const messages = [
       new SystemMessage(await formattedPartialPrompt),
+      ...contextImages,
       new HumanMessage(serializedContext),
     ];
-    return chatModel.pipe(new StringOutputParser()).invoke(messages);
+    return model.pipe(new StringOutputParser()).invoke(messages);
   },
-  getTokenCount: (content) => chatModel.getNumTokens(content),
+  getTokenCount: (content) => model.getNumTokens(content),
 });
-
-export const wrapModel = (
-  model: BaseChatModel | BaseLLM,
-  rootFormatter: RootFormatter,
-): AnaplianModel => {
-  if (isChatModel(model)) {
-    return wrapChatModel(model, rootFormatter);
-  }
-  return wrapBaseLLM(model, rootFormatter);
-};
