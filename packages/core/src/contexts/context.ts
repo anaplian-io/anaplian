@@ -1,4 +1,4 @@
-import { ContextError } from '../common/types';
+import { ContextError, ContextImages } from '../common/types';
 
 /**
  * Object for assisting in generating the next partial context.
@@ -13,7 +13,7 @@ export interface GetNextContextProps<
    * context, there was an error processing the last context update.
    */
   readonly priorContext: Record<string, Record<string, unknown>> &
-    Record<KEY, VALUE & ContextError>;
+    Record<KEY, VALUE & ContextError & ContextImages>;
 
   /**
    * The action that was last taken by the agent.
@@ -58,7 +58,7 @@ export type ContextRefreshProps<
  */
 export interface ContextProvider<
   KEY extends string,
-  VALUE extends Record<string, unknown>,
+  VALUE extends Record<string, unknown> = Record<never, unknown>,
 > {
   /**
    * The ContextProvider should return the next step of this part of the context. If this promise rejects,
@@ -69,8 +69,8 @@ export interface ContextProvider<
    * It will be assigned to KEY in the context object.
    */
   readonly getNextContext: (
-    props: GetNextContextProps<KEY, VALUE>,
-  ) => Promise<VALUE>;
+    props: GetNextContextProps<KEY, VALUE & ContextImages>,
+  ) => Promise<VALUE & ContextImages>;
   /**
    * The initial context provided. If this promise rejects, this is considered a fatal error. This is only invoked
    * once on initial agent boot.
@@ -79,8 +79,8 @@ export interface ContextProvider<
    * @returns {Promise<T extends Record<string, unknown>>} - The initial context partial.
    */
   readonly getInitialContext: (
-    props: GetInitialContextProps<KEY, VALUE>,
-  ) => Promise<VALUE>;
+    props: GetInitialContextProps<KEY, VALUE & ContextImages>,
+  ) => Promise<VALUE & ContextImages>;
   /**
    * This optionally-defined method allows will be called just before the agent takes an action. This is intended for context providers
    * that are independent of the action that the agent takes. For example, if an agent is running inside a cron job that executes hourly,
@@ -89,7 +89,9 @@ export interface ContextProvider<
    * @param {ContextRefreshProps} props - Contains the maximum number of allowed tokens and a utility function for measuring the number of tokens as well as the prior context.
    * @returns {Promise<T extends Record<string, unknown>>} - The initial context partial.
    */
-  readonly refresh?: (props: ContextRefreshProps<KEY, VALUE>) => Promise<VALUE>;
+  readonly refresh?: (
+    props: ContextRefreshProps<KEY, VALUE & ContextImages>,
+  ) => Promise<VALUE & ContextImages>;
   /**
    * Used to assemble the initial context object. This is also referenced to the agent as the name of partial context.
    */

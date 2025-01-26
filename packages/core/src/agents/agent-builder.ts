@@ -27,6 +27,7 @@ import {
   InvalidActionError,
   InvalidAgentParametersError,
 } from '../errors/agent-validation-error';
+import { serializeContextToJson } from '../common/serializeContextToJson';
 
 /**
  * Defines the required properties for {@link AgentBuilder}.
@@ -158,7 +159,7 @@ export class AgentBuilder {
    * Constructs the agent and validates. Validation errors will throw {@link AgentValidationError}.
    */
   public readonly build = async (): Promise<AnaplianAgent> => {
-    const serializer = JSON.stringify;
+    const serializer = serializeContextToJson;
     const leftPadding = '\t';
     const modelOutputParser: ModelOutputParser = xmlModelOutputParser;
     const rootFormatter = new RootFormatter({
