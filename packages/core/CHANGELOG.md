@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.13.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.3...@anaplian/core-v1.13.0) (2025-01-26)
+
+
+### Features
+
+* **core:** experimental API for supporting image inputs in context providers ([#77](https://github.com/anaplian-io/anaplian/issues/77)) ([1d96a24](https://github.com/anaplian-io/anaplian/commit/1d96a2481b9abfabc428dfb41de7e7c11bca2810))
+
 # [@anaplian/core-v1.12.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.2...@anaplian/core-v1.12.3) (2025-01-20)
 
 
