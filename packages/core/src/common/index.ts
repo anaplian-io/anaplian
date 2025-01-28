@@ -1,1 +1,2 @@
-export { Context } from './types';
+export { Context, Image } from './types';
+export { serializeWithoutImages } from './serialize-without-images';
