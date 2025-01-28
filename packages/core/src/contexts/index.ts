@@ -7,3 +7,7 @@ export {
   HistoryContextProvider,
 } from './history-context';
 export { isHistoryContext } from './history-context.guard';
+export {
+  StaticImageContextProvider,
+  StaticImageContextProviderProps,
+} from './static-image-context';

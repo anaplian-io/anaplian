@@ -58,7 +58,7 @@ export type ContextRefreshProps<
  */
 export interface ContextProvider<
   KEY extends string,
-  VALUE extends Record<string, unknown> = Record<never, unknown>,
+  VALUE extends Record<string, unknown> = Record<string, unknown>,
 > {
   /**
    * The ContextProvider should return the next step of this part of the context. If this promise rejects,
