@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.13.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.13.0...@anaplian/core-v1.13.1) (2025-01-28)
+
+
+### Bug Fixes
+
+* **core:** added a context provider that adds static images to the context and fixed serializer ([#84](https://github.com/anaplian-io/anaplian/issues/84)) ([0de3abc](https://github.com/anaplian-io/anaplian/commit/0de3abc583dad7aed3dc44adb9767f511e1ea326))
+
 # [@anaplian/core-v1.13.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.12.3...@anaplian/core-v1.13.0) (2025-01-26)
 
 
