@@ -5,6 +5,8 @@ import {
   HistoryContextProvider,
   isHistoryContext,
   NopAction,
+  serializeWithoutImages,
+  StaticImageContextProvider,
   ThinkAction,
 } from '@anaplian/core';
 import { ChatOpenAI } from '@langchain/openai';
@@ -23,13 +25,14 @@ const openAiApiKey = getEnvironmentVariable('OPEN_AI_API_KEY');
 const directive = getEnvironmentVariable('DIRECTIVE');
 const tavilyApiKey = getEnvironmentVariable('TAVILY_API_KEY');
 const discordToken = getEnvironmentVariable('DISCORD_BOT_TOKEN');
+const imageUrl = getEnvironmentVariable('IMAGE_URL');
 let djanSeriy: AnaplianAgent | undefined;
 const discordClient = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
 });
 discordClient
   .login(discordToken)
-  .then(() => {
+  .then(async () => {
     console.info('CONNECTED TO DISCORD');
     const modelName = 'gpt-4o-mini';
     return new AgentBuilder({
@@ -61,7 +64,7 @@ discordClient
         }),
       )
       .addAction(new HttpGetMarkdownAction({}))
-      .addContextProvider(new HistoryContextProvider({}), 97.5)
+      .addContextProvider(new HistoryContextProvider({}), 97)
       .addContextProvider(new DateContextProvider(), 0.5)
       .addContextProvider(
         new GuildContextProvider({
@@ -69,9 +72,23 @@ discordClient
         }),
         2,
       )
+      .addContextProvider(
+        new StaticImageContextProvider({
+          images: [
+            {
+              annotation: 'Input image',
+              imageType: 'jpeg',
+              imageContent: await fetch(imageUrl).then(async (response) =>
+                Buffer.from(await response.arrayBuffer()),
+              ),
+            },
+          ],
+        }),
+        0.5,
+      )
       .setOn('beforeShutdown', async (context) => {
         console.info('SHUTTING DOWN...');
-        console.info(JSON.stringify(context));
+        console.info(serializeWithoutImages(context));
       })
       .setOn('afterIterationEnd', async (context) => {
         const history = context.history;
