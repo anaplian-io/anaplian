@@ -39,7 +39,7 @@
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/core",
   "devDependencies": {
     "@langchain/core": "^0.3.26",
-    "@langchain/openai": "^0.3.16",
+    "@langchain/openai": "^0.4.2",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
     "ts-auto-guard": "^5.0.1",
