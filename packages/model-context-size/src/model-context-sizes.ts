@@ -59,4 +59,13 @@ export const modelContextSizes = {
   'gemini-2.0-flash-exp': 1_000_000,
   'jamba-1.5-mini': 256000,
   'jamba-1.5-large': 256000,
+  'o3-mini': 200_000,
+  'o3-mini-2025-01-31': 200_000,
+  'gpt-4o-realtime-preview': 128_000,
+  'gpt-4o-realtime-preview-2024-12-17': 128_000,
+  'gpt-4o-realtime-preview-2024-10-01': 128_000,
+  'gpt-4o-mini-realtime-preview': 128_000,
+  'gpt-4o-mini-realtime-preview-2024-12-17': 128_000,
+  'gpt-4o-2024-08-06': 128_000,
+  'gpt-4o-2024-11-20': 128_000,
 };
