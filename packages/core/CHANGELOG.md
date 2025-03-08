@@ -89,7 +89,7 @@
 
 ### Features
 
-* **core:** implement the the date context provider ([fc1978a](https://github.com/anaplian-io/anaplian/commit/fc1978a25e179e7c8d5554594beda15b3e38415a))
+* **core:** implement the date context provider ([fc1978a](https://github.com/anaplian-io/anaplian/commit/fc1978a25e179e7c8d5554594beda15b3e38415a))
 
 # [@anaplian/core-v1.6.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.5.0...@anaplian/core-v1.6.0) (2025-01-05)
 
