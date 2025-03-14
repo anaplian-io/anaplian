@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier .",
+    "prettier": "prettier --check .",
     "format": "npm run lint:fix && prettier --write .",
     "build": "npm run lint && npm run prettier && lerna run build",
     "test": "lerna run test",

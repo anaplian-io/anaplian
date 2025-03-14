@@ -10,6 +10,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -37,6 +39,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 10,
         modelName: '',
@@ -66,9 +70,11 @@ describe(AgentValidator, () => {
       },
     },
   ])('is valid', async (agent) => {
-    expect.assertions(3);
+    expect.assertions(5);
     expect(agent.run).not.toHaveBeenCalled();
     expect(agent.shutdown).not.toHaveBeenCalled();
+    expect(agent.next).not.toHaveBeenCalled();
+    expect(agent.initialize).not.toHaveBeenCalled();
     await expect(validator.validate(agent)).resolves.toStrictEqual({
       valid: true,
     });
@@ -78,6 +84,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 3,
         modelName: '',
@@ -109,6 +117,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -140,6 +150,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -171,6 +183,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -201,6 +215,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -232,6 +248,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -256,6 +274,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -287,6 +307,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 4,
         modelName: '',
@@ -300,6 +322,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 10,
         modelName: '',
@@ -331,6 +355,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: -1,
         modelName: '',
@@ -362,6 +388,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 10,
         modelName: '',
@@ -393,6 +421,8 @@ describe(AgentValidator, () => {
     {
       run: jest.fn(),
       shutdown: jest.fn(),
+      initialize: jest.fn(),
+      next: jest.fn(),
       metadata: {
         modelContextWindowSize: 10,
         modelName: '',
@@ -422,9 +452,11 @@ describe(AgentValidator, () => {
       },
     },
   ])('is invalid', async (agent) => {
-    expect.assertions(3);
+    expect.assertions(5);
     expect(agent.run).not.toHaveBeenCalled();
     expect(agent.shutdown).not.toHaveBeenCalled();
+    expect(agent.initialize).not.toHaveBeenCalled();
+    expect(agent.next).not.toHaveBeenCalled();
     await expect(validator.validate(agent)).resolves.toStrictEqual(
       expect.objectContaining({
         valid: false,
