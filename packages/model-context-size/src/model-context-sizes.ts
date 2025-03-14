@@ -68,4 +68,9 @@ export const modelContextSizes = {
   'gpt-4o-mini-realtime-preview-2024-12-17': 128_000,
   'gpt-4o-2024-08-06': 128_000,
   'gpt-4o-2024-11-20': 128_000,
+  'gpt-4.5-preview': 128_000,
+  'gpt-4.5-preview-2025-02-27': 128_000,
+  'gpt-4o-audio-preview-2024-10-01': 128_000,
+  'gpt-4o-audio-preview-2024-12-17': 128_000,
+  'gpt-4o-audio-preview': 128_000,
 };
