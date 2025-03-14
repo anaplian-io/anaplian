@@ -1,3 +1,10 @@
+# [@anaplian/model-context-size-v1.0.8](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.7...@anaplian/model-context-size-v1.0.8) (2025-03-14)
+
+
+### Bug Fixes
+
+* **model-context-sizes:** updated OpenAI models ([#114](https://github.com/anaplian-io/anaplian/issues/114)) ([754c4be](https://github.com/anaplian-io/anaplian/commit/754c4be1bb751b828ab5827b92b4cef8d43cda0a))
+
 # [@anaplian/model-context-size-v1.0.7](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.6...@anaplian/model-context-size-v1.0.7) (2025-02-03)
 
 
