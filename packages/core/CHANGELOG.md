@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.14.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.13.1...@anaplian/core-v1.14.0) (2025-03-14)
+
+
+### Features
+
+* **core:** allows single agent iterations to be run outside the main event loop ([#112](https://github.com/anaplian-io/anaplian/issues/112)) ([ebf356d](https://github.com/anaplian-io/anaplian/commit/ebf356d1b14272532be8754c17fcefac15c37cc1))
+
 # [@anaplian/core-v1.13.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.13.0...@anaplian/core-v1.13.1) (2025-01-28)
 
 
