@@ -8,13 +8,26 @@ import { Context } from '../common';
 export interface AnaplianAgent {
   /**
    * Begins the agent's main event loop. Be careful about awaiting this promise
-   * as it will block execution until the agent shuts down.
+   * as it will block execution until the agent shuts down. This will also
+   * initialize the agent.
    */
   readonly run: () => Promise<void>;
   /**
    * Begins the agent shutdown process.
    */
   readonly shutdown: () => Promise<void>;
+  /**
+   * Builds the initial context by invoking the initial context of all
+   * context providers. You DO NOT need to call this if you are allowing the
+   * agent to control its own event loop through .run().
+   */
+  readonly initialize: () => Promise<void>;
+  /**
+   * Executes a single iteration of the agent's event loop. Only use this
+   * if you want to strictly control the agent's event loop. Calling .run()
+   * will allow the agent to run the event loop itself.
+   */
+  readonly next: () => Promise<void>;
   /**
    * Information returned to the builder caller for debugging and record keeping.
    */
@@ -50,7 +63,7 @@ export interface AnaplianAgent {
       /**
        * The context provider.
        */
-      readonly provider: ContextProvider<string, Record<string, unknown>>;
+      readonly provider: ContextProvider<string>;
       /**
        * The maximum number of tokens allocated to this context provider.
        */

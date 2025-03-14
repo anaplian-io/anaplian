@@ -240,6 +240,8 @@ export class AgentBuilder {
       },
       run: agentOrchestrator.run,
       shutdown: agentOrchestrator.shutdown,
+      next: agentOrchestrator.next,
+      initialize: agentOrchestrator.initialize,
     };
     const agentValidator: Validator<AnaplianAgent> = new AgentValidator();
     const agentValidity = await agentValidator.validate(agent);

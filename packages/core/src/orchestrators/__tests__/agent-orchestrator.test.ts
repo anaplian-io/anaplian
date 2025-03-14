@@ -189,4 +189,21 @@ describe('AgentOrchestrator', () => {
       expect(mockEvents.beforeShutdown).toHaveBeenCalledTimes(1);
     });
   });
+
+  describe('next', () => {
+    it('should initialize itself if called while uninitialized', async () => {
+      await orchestrator.next();
+
+      expect(mockEvents.beforeIterationStart).toHaveBeenCalled();
+      expect(mockEvents.afterInitialize).toHaveBeenCalled();
+    });
+
+    it('should not initialize itself if called while initialized', async () => {
+      await orchestrator.initialize();
+      await orchestrator.next();
+
+      expect(mockEvents.beforeIterationStart).toHaveBeenCalled();
+      expect(mockEvents.afterInitialize).toHaveBeenCalledTimes(1);
+    });
+  });
 });

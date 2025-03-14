@@ -22,11 +22,28 @@ export interface AgentOrchestratorProps {
 
 export class AgentOrchestrator {
   private shuttingDown: boolean = false;
+  private initialized: boolean = false;
   private currentContext: Context = {};
   private eventLoopImmediate: ReturnType<typeof setImmediate> | undefined;
   constructor(private readonly props: AgentOrchestratorProps) {}
 
   public readonly run: AnaplianAgent['run'] = async () => {
+    if (!this.initialized) {
+      await this.initialize();
+    }
+    while (!this.shuttingDown) {
+      try {
+        await this.next().then(() => this.yieldToEventLoop());
+      } catch (error) {
+        await this.props.events
+          .fatalError(error)
+          .catch(() => {})
+          .then(() => this.shutdown());
+      }
+    }
+  };
+
+  public readonly initialize: AnaplianAgent['initialize'] = async () => {
     if (this.props.initialContext) {
       this.currentContext = Object.freeze(this.props.initialContext);
     } else {
@@ -35,52 +52,43 @@ export class AgentOrchestrator {
       );
     }
     this.props.events.afterInitialize(this.currentContext).catch(() => {});
-    while (!this.shuttingDown) {
-      try {
-        this.props.events
-          .beforeIterationStart(this.currentContext)
-          .catch(() => {});
-        this.currentContext = await this.props.contextCreator.refreshContext(
-          this.currentContext,
-        );
-        const rawModelOutput = await this.props.model.invoke(
-          this.currentContext,
-        );
-        this.currentContext = await this.props.modelOutputParser
-          .parse(rawModelOutput)
-          .then((parsedAction) =>
-            this.props.actionExecutor
-              .execute(parsedAction)
-              .then((result) => ({ parsedAction, result })),
-          )
-          .catch((error) => {
-            if (error instanceof AgentError) {
-              return {
-                parsedAction: rawModelOutput,
-                result: `ERROR: ${error.message}`,
-              };
-            }
-            throw error;
-          })
-          .then((actionResult) =>
-            this.props.contextCreator.createNextContext({
-              actionResult: actionResult.result,
-              actionTaken: actionResult.parsedAction,
-              priorContext: this.currentContext,
-            }),
-          )
-          .then((newContext) => Object.freeze(newContext));
-        this.props.events
-          .afterIterationEnd(this.currentContext)
-          .catch(() => {});
-        await this.yieldToEventLoop();
-      } catch (error) {
-        await this.props.events
-          .fatalError(error)
-          .catch(() => {})
-          .then(() => this.shutdown());
-      }
+    this.initialized = true;
+  };
+
+  public readonly next: AnaplianAgent['next'] = async () => {
+    if (!this.initialized) {
+      await this.initialize();
     }
+    this.props.events.beforeIterationStart(this.currentContext).catch(() => {});
+    this.currentContext = await this.props.contextCreator.refreshContext(
+      this.currentContext,
+    );
+    const rawModelOutput = await this.props.model.invoke(this.currentContext);
+    this.currentContext = await this.props.modelOutputParser
+      .parse(rawModelOutput)
+      .then((parsedAction) =>
+        this.props.actionExecutor
+          .execute(parsedAction)
+          .then((result) => ({ parsedAction, result })),
+      )
+      .catch((error) => {
+        if (error instanceof AgentError) {
+          return {
+            parsedAction: rawModelOutput,
+            result: `ERROR: ${error.message}`,
+          };
+        }
+        throw error;
+      })
+      .then((actionResult) =>
+        this.props.contextCreator.createNextContext({
+          actionResult: actionResult.result,
+          actionTaken: actionResult.parsedAction,
+          priorContext: this.currentContext,
+        }),
+      )
+      .then((newContext) => Object.freeze(newContext));
+    this.props.events.afterIterationEnd(this.currentContext).catch(() => {});
   };
 
   public readonly shutdown: AnaplianAgent['shutdown'] = async () => {
