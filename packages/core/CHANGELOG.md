@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.14.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.14.0...@anaplian/core-v1.14.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* **core:** model name is no longer required ([#121](https://github.com/anaplian-io/anaplian/issues/121)) ([d055763](https://github.com/anaplian-io/anaplian/commit/d055763d3605dc7ca8329be4d71319f288beb0c8))
+
 # [@anaplian/core-v1.14.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.13.1...@anaplian/core-v1.14.0) (2025-03-14)
 
 
