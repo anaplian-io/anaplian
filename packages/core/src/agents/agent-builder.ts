@@ -41,9 +41,10 @@ export interface AgentBuilderProps {
    */
   readonly model: BaseLLM | BaseChatModel;
   /**
-   * The canonical name of the model (e.g. 'gpt-4o-mini').
+   * The canonical name of the model (e.g. 'gpt-4o-mini'). If this model is recognized by @anaplian/model-context-size,
+   * the context window size will be set automatically.
    */
-  readonly modelName: string;
+  readonly modelName?: string;
   /**
    * Tells the model who it is, how it should act, and what task it should accomplish.
    */
@@ -182,7 +183,7 @@ export class AgentBuilder {
     const model = wrapModel(this.props.model, rootFormatter);
     const modelContextWindowSize =
       this.contextWindowSize ??
-      (isModelSupported(this.props.modelName)
+      (this.props.modelName && isModelSupported(this.props.modelName)
         ? getModelContextSize(this.props.modelName)
         : 4096);
     const paddingTokens =
@@ -231,7 +232,7 @@ export class AgentBuilder {
     const agent: AnaplianAgent = {
       metadata: {
         availableActions: this.actions,
-        modelName: this.props.modelName,
+        modelName: this.props.modelName ?? 'unspecified',
         initialContext: this.initialContext,
         contextProviders,
         instructionsTokens,
