@@ -77,7 +77,6 @@ describe('AgentBuilder', () => {
     const builder = new AgentBuilder({
       roleAssignmentDirective: '',
       model: new FakeChatModel({}),
-      modelName: 'a-fake-model',
     })
       .addAction({
         apply: jest.fn(),
@@ -111,10 +110,10 @@ describe('AgentBuilder', () => {
       .setPaddingTokens(100)
       .setInitialContext({ foo: {}, bar: {} });
     const agent = await builder.build();
-    expect(agent.metadata.modelName).toBe('a-fake-model');
     expect(agent.metadata.modelContextWindowSize).toBe(1000);
     expect(agent.metadata.paddingTokens).toBe(100);
     expect(agent.metadata.instructionsTokens).toBe(216);
+    expect(agent.metadata.modelName).toBe('unspecified');
   });
 
   it('tests the event handlers', async () => {

@@ -38,6 +38,7 @@
   },
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/core",
   "devDependencies": {
+    "@anaplian/model-context-size": "^1.0.8",
     "@langchain/core": "^0.3.26",
     "@langchain/openai": "^0.4.2",
     "@types/jest": "^29.5.14",
@@ -50,10 +51,8 @@
     "access": "public"
   },
   "peerDependencies": {
+    "@anaplian/model-context-size": ">=1.0.4 <1.1.0",
     "@langchain/core": ">=0.3.26 <0.4.0"
-  },
-  "dependencies": {
-    "@anaplian/model-context-size": "^1.0.3"
   },
   "keywords": [
     "llm",
