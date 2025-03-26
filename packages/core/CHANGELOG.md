@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.14.1...@anaplian/core-v1.15.0) (2025-03-26)
+
+
+### Features
+
+* **core:** improves action argument definition by allowing objects instead of tuples ([#128](https://github.com/anaplian-io/anaplian/issues/128)) ([bead4fe](https://github.com/anaplian-io/anaplian/commit/bead4fea83fadb695051009a4561cb7da5255efe))
+
 # [@anaplian/core-v1.14.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.14.0...@anaplian/core-v1.14.1) (2025-03-17)
 
 
