@@ -56,15 +56,15 @@ describe('RootFormatter', () => {
     const result = await rootFormatter.formatPartial();
     expect(availableActions[0]?.apply).not.toHaveBeenCalled();
     expect(result).toBe(`
-Role Assignment:
+Role Assignment Directive - This is Your Objective; Select Actions to Accomplish Your Objective:
 You are a helpful robot in search of love.
 
-Available Actions:
+Available Actions - You MUST Select an Action from This List:
 
 	Action: nop()
 		Description: Does not do much
 
-Context Object Components:
+Context Object Components - This is the Information That will be Available to You After Each Action:
 
 	Context Component: date
 		Description: The current date.
@@ -74,7 +74,7 @@ Context Object Components:
 			Example Context Component: {"date":{"calendarDate":"Nevebuary 32"}}
 			Description: This is a dubious date.
 
-Instructions:
+Instructions - This is How You Execute Actions to Serve Your Role Assignment Directive:
 Do it. Do it now.
 `);
   });
@@ -88,25 +88,25 @@ Do it. Do it now.
     });
     expect(availableActions[0]?.apply).not.toHaveBeenCalled();
     expect(result).toBe(`
-Role Assignment:
+Role Assignment Directive - This is Your Objective; Select Actions to Accomplish Your Objective:
 You are a helpful robot in search of love.
 
-Available Actions:
+Available Actions - You MUST Select an Action from This List:
 
-	Action: nop()
-		Description: Does not do much
+\tAction: nop()
+\t\tDescription: Does not do much
 
-Context Object Components:
+Context Object Components - This is the Information That will be Available to You After Each Action:
 
-	Context Component: date
-		Description: The current date.
-		Field: calendarDate
-			Description: An ISO date.
-		Example 0:
-			Example Context Component: {"date":{"calendarDate":"Nevebuary 32"}}
-			Description: This is a dubious date.
+\tContext Component: date
+\t\tDescription: The current date.
+\t\tField: calendarDate
+\t\t\tDescription: An ISO date.
+\t\tExample 0:
+\t\t\tExample Context Component: {"date":{"calendarDate":"Nevebuary 32"}}
+\t\t\tDescription: This is a dubious date.
 
-Instructions:
+Instructions - This is How You Execute Actions to Serve Your Role Assignment Directive:
 Do it. Do it now.
 
 Current Context Object:

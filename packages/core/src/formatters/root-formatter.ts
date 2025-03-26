@@ -18,16 +18,16 @@ export interface RootFormatterProps {
 }
 
 const promptTemplate = PromptTemplate.fromTemplate(`
-Role Assignment:
+Role Assignment Directive - This is Your Objective; Select Actions to Accomplish Your Objective:
 {roleAssignmentDirective}
 
-Available Actions:
+Available Actions - You MUST Select an Action from This List:
 {actionsDocumentation}
 
-Context Object Components:
+Context Object Components - This is the Information That will be Available to You After Each Action:
 {contextComponentsDocumentation}
 
-Instructions:
+Instructions - This is How You Execute Actions to Serve Your Role Assignment Directive:
 {functionalInstructions}
 `);
 

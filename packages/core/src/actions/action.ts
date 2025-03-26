@@ -44,7 +44,9 @@ export interface Action<ARGUMENT_NAMES extends string = never | string> {
   /**
    * The set of arguments required to execute this action.
    */
-  readonly arguments?: UnionToTupleOfActionArguments<ARGUMENT_NAMES>;
+  readonly arguments?:
+    | UnionToTupleOfActionArguments<ARGUMENT_NAMES>
+    | Record<ARGUMENT_NAMES, Omit<ActionArgument<string>, 'name'>>;
 
   /**
    * A description of this Action that will be provided to the agent.

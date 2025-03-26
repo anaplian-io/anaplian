@@ -6,12 +6,11 @@ import { Action } from './action';
  */
 export class ThinkAction implements Action<'thought'> {
   public readonly name: string = 'think';
-  public readonly arguments: Action<'thought'>['arguments'] = [
-    {
-      name: 'thought',
+  public readonly arguments: Action<'thought'>['arguments'] = {
+    thought: {
       description: 'The thought that will be saved to history.',
     },
-  ];
+  };
   public readonly description: string =
     'This action echoes its input to the output. This will be retained in history, ' +
     'but it will not be published externally. This is useful for considering and reasoning prior to taking other actions ' +

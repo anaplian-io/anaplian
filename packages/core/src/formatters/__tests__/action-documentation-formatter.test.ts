@@ -132,4 +132,53 @@ describe('ActionDocumentationFormatter', () => {
 			YOU: add("-5.5","5.5")
 			RESULT: 0`);
   });
+
+  it('formats an addition operation with several examples using updated argument definitions', async () => {
+    const formatter = new ActionDocumentationFormatter({
+      leftPadding: '\t',
+    });
+    const action: Action<'a' | 'b'> = {
+      apply: jest.fn(),
+      description: 'Adds two numbers together.',
+      name: 'add',
+      arguments: {
+        a: {
+          description: 'The first number. Must be a valid base 10 number.',
+          exampleInvalidValues: ['a24bcd', 'stuff', '#4', '2e22'],
+          exampleValidValues: ['-5', '1', '0.24', '9102'],
+        },
+        b: {
+          description: 'The second number. Must be a valid base 10 number.',
+          exampleInvalidValues: ['a24bcd', 'stuff', '#4', '2e22'],
+          exampleValidValues: ['-5', '1', '0.24', '9102'],
+        },
+      },
+      examples: [
+        {
+          arguments: ['2', '5'],
+          result: '7',
+        },
+        {
+          arguments: ['-5.5', '5.5'],
+          result: '0',
+        },
+      ],
+    };
+    const prompt = await formatter.format(action);
+    expect(prompt).toBe(`
+	Action: add(a,b)
+		Description: Adds two numbers together.
+		Argument 0: a - The first number. Must be a valid base 10 number.
+			Example valid values: "-5", "1", "0.24", "9102"
+			Example invalid values: "a24bcd", "stuff", "#4", "2e22"
+		Argument 1: b - The second number. Must be a valid base 10 number.
+			Example valid values: "-5", "1", "0.24", "9102"
+			Example invalid values: "a24bcd", "stuff", "#4", "2e22"
+		Example 0:
+			YOU: add("2","5")
+			RESULT: 7
+		Example 1:
+			YOU: add("-5.5","5.5")
+			RESULT: 0`);
+  });
 });

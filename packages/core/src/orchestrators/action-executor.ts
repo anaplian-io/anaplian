@@ -4,9 +4,10 @@ import {
   InvalidSyntaxError,
   NoSuchActionError,
 } from '../errors/agent-error';
+import { extractArguments } from '../common/extract-arguments';
 
 export interface ActionExecutorProps {
-  readonly availableActions: Action<string>[];
+  readonly availableActions: Action<never | string>[];
 }
 
 const commandRegex = /^(\w+)\((.*)\)$/;
@@ -35,14 +36,17 @@ export class ActionExecutor {
       (argument) =>
         argument.slice(1, -1).replace(/\\"/g, '"').replace(/\\n/g, '\n'),
     );
-    if (parsedArguments.length !== (selectedAction.arguments?.length || 0)) {
+    const extractedArguments = extractArguments(
+      selectedAction.arguments as Action['arguments'],
+    );
+    if (parsedArguments.length !== (extractedArguments.length || 0)) {
       throw new IncorrectActionUsageError(
-        `Action "${selectedAction.name}" requires ${selectedAction.arguments?.length || 0} argument(s) but found ${parsedArguments.length} instead`,
+        `Action "${selectedAction.name}" requires ${extractedArguments.length || 0} argument(s) but found ${parsedArguments.length} instead`,
       );
     }
     return await selectedAction.apply(
       Object.fromEntries(
-        (selectedAction.arguments || []).map((argument, index) => [
+        extractedArguments.map((argument, index) => [
           argument.name,
           parsedArguments[index]!,
         ]),
