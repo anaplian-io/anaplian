@@ -1,26 +1,33 @@
-import { Action } from '../actions';
+import { Action, ActionArgument } from '../actions';
 import { Validator } from './validator';
+import { extractArguments } from '../common/extract-arguments';
 
 const nameRegex = /^(\w+)$/;
 
 export class ActionValidator implements Validator<Action> {
-  public readonly validate = async (
-    action: Action,
+  public readonly validate = async <T extends string>(
+    action: Action<T>,
   ): Promise<{ valid: true } | { valid: false; reason: string }> => {
+    const extractedArguments = extractArguments(
+      action.arguments as Action['arguments'],
+    );
     if (!action.name.match(nameRegex)) {
       return {
         valid: false,
         reason: `${action.name}: Action name "${action.name}" does not match regex ${nameRegex}`,
       };
     }
-    const invalidExamples = this.getInvalidExamples(action);
+    const invalidExamples = this.getInvalidExamples(
+      action as Action,
+      extractedArguments,
+    );
     if (invalidExamples.length > 0) {
       return {
         valid: false,
-        reason: `${action.name}: Found an example with ${invalidExamples[0]?.arguments?.length} argument(s) but ${action.arguments?.length || 0} expected.`,
+        reason: `${action.name}: Found an example with ${invalidExamples[0]?.arguments?.length} argument(s) but ${extractedArguments.length} expected.`,
       };
     }
-    const invalidArguments = this.getInvalidArguments(action);
+    const invalidArguments = this.getInvalidArguments(action as Action);
     if (invalidArguments.length > 0) {
       return {
         valid: false,
@@ -32,12 +39,17 @@ export class ActionValidator implements Validator<Action> {
     };
   };
 
-  private readonly getInvalidExamples = (action: Action) =>
+  private readonly getInvalidExamples = (
+    action: Action,
+    extractedArguments: ActionArgument<string>[],
+  ) =>
     action.examples?.filter(
-      (example) => example.arguments?.length !== action.arguments?.length,
+      (example) =>
+        (example.arguments?.length || 0) !== extractedArguments.length,
     ) || [];
 
   private readonly getInvalidArguments = (action: Action) =>
-    action.arguments?.filter((argument) => !argument.name.match(nameRegex)) ||
-    [];
+    extractArguments(action.arguments).filter(
+      (argument) => !argument.name.match(nameRegex),
+    );
 }

@@ -48,7 +48,7 @@ describe('ActionExecutor', () => {
       },
     ];
     const executor = new ActionExecutor({
-      availableActions,
+      availableActions: availableActions as Action<string>[],
     });
     const result = await executor.execute(
       'echo("\\"Mistake Not...\\"","...my vast oceans of wrath\\n\\n")',
@@ -80,7 +80,7 @@ describe('ActionExecutor', () => {
       },
     ];
     const executor = new ActionExecutor({
-      availableActions,
+      availableActions: availableActions as Action<string>[],
     });
     await expect(executor.execute('echo ("foo","bar")')).rejects.toThrow(
       InvalidSyntaxError,
@@ -108,7 +108,7 @@ describe('ActionExecutor', () => {
       },
     ];
     const executor = new ActionExecutor({
-      availableActions,
+      availableActions: availableActions as Action<string>[],
     });
     await expect(executor.execute('nop("foo","bar")')).rejects.toThrow(
       NoSuchActionError,
@@ -136,7 +136,7 @@ describe('ActionExecutor', () => {
       },
     ];
     const executor = new ActionExecutor({
-      availableActions,
+      availableActions: availableActions as Action<string>[],
     });
     await expect(executor.execute('echo()')).rejects.toThrow(
       IncorrectActionUsageError,
@@ -187,7 +187,7 @@ describe('ActionExecutor', () => {
       },
     ];
     const executor = new ActionExecutor({
-      availableActions,
+      availableActions: availableActions as Action<string>[],
     });
     await expect(executor.execute('echo("foo","bar")')).rejects.toThrow(
       InvalidArgumentError,

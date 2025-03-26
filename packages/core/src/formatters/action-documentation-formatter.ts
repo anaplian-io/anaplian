@@ -1,6 +1,7 @@
 import { Formatter } from './formatter';
 import { Action } from '../actions';
 import { PromptTemplate } from '@langchain/core/prompts';
+import { extractArguments } from '../common/extract-arguments';
 
 export interface ActionDocumentationFormatterProps {
   readonly leftPadding: string;
@@ -29,17 +30,23 @@ const fullPrompt = PromptTemplate.fromTemplate(`
 
 export class ActionDocumentationFormatter implements Formatter<Action> {
   constructor(private readonly props: ActionDocumentationFormatterProps) {}
-  public readonly format = async (item: Action): Promise<string> => {
+
+  public readonly format = async <T extends string>(
+    item: Action<T>,
+  ): Promise<string> => {
+    const extractedArguments = extractArguments(
+      item.arguments as Action['arguments'],
+    );
     const headerFormatter = headerPrompt.format({
       padding: this.props.leftPadding,
-      name: `${item.name}(${item.arguments?.map((arg) => arg.name).join(',') || ''})`,
+      name: `${item.name}(${extractedArguments.map((arg) => arg.name).join(',') || ''})`,
     });
     const descriptionFormatter = descriptionPrompt.format({
       padding: this.props.leftPadding,
       description: item.description.trimEnd(),
     });
     const argumentFormatter = Promise.all(
-      item.arguments?.map((argument, index) =>
+      extractedArguments.map((argument, index) =>
         argumentPrompt
           .format({
             name: argument.name,
@@ -58,13 +65,13 @@ export class ActionDocumentationFormatter implements Formatter<Action> {
                 : '',
           })
           .then((result) => result.trimEnd()),
-      ) || [Promise.resolve('')],
+      ),
     ).then((result) => result.join('\n'));
     const exampleFormatter = Promise.all(
       item.examples?.map((example, index) =>
         examplePrompt
           .format({
-            input: `${item.name}(${example.arguments?.map((arg) => `"${arg}"`) || ''})`,
+            input: `${item.name}(${extractArguments(example.arguments as Action['arguments']).map((arg) => `"${arg}"`)})`,
             n: index,
             output: example.result,
             padding: this.props.leftPadding,
