@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.0...@anaplian/core-v1.15.1) (2025-03-27)
+
+
+### Bug Fixes
+
+* **core:** example action arguments are now correctly escaped ([#130](https://github.com/anaplian-io/anaplian/issues/130)) ([377a6f9](https://github.com/anaplian-io/anaplian/commit/377a6f9db526bfe59fda12c4f86917fbc7776b54))
+
 # [@anaplian/core-v1.15.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.14.1...@anaplian/core-v1.15.0) (2025-03-26)
 
 
