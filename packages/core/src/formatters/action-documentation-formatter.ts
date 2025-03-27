@@ -28,6 +28,9 @@ const fullPrompt = PromptTemplate.fromTemplate(`
 {examples}
 `);
 
+const escapeArgument = (str: string): string =>
+  str.replaceAll('\n', '\\n').replaceAll('\"', '\\"');
+
 export class ActionDocumentationFormatter implements Formatter<Action> {
   constructor(private readonly props: ActionDocumentationFormatterProps) {}
 
@@ -56,12 +59,18 @@ export class ActionDocumentationFormatter implements Formatter<Action> {
             validExamples:
               argument.exampleValidValues &&
               argument.exampleValidValues.length > 0
-                ? `Example valid values: ${argument.exampleValidValues.map((value) => `"${value}"`).join(', ')}`
+                ? `Example valid values: ${argument.exampleValidValues
+                    .map(escapeArgument)
+                    .map((value) => `"${value}"`)
+                    .join(', ')}`
                 : '',
             invalidExamples:
               argument.exampleInvalidValues &&
               argument.exampleInvalidValues.length > 0
-                ? `Example invalid values: ${argument.exampleInvalidValues.map((value) => `"${value}"`).join(', ')}`
+                ? `Example invalid values: ${argument.exampleInvalidValues
+                    .map(escapeArgument)
+                    .map((value) => `"${value}"`)
+                    .join(', ')}`
                 : '',
           })
           .then((result) => result.trimEnd()),
