@@ -181,4 +181,50 @@ describe('ActionDocumentationFormatter', () => {
 			YOU: add("-5.5","5.5")
 			RESULT: 0`);
   });
+
+  it('formats a think operation that includes multiline and double quotes', async () => {
+    const formatter = new ActionDocumentationFormatter({
+      leftPadding: '\t',
+    });
+
+    const action: Action<'firstArgument'> = {
+      apply: jest.fn(),
+      description: 'Echoes a thought.',
+      name: 'think',
+      arguments: {
+        firstArgument: {
+          description: 'The thought to be thunk.',
+          exampleValidValues: [
+            'this is an argument \n with newlines and \" double quotes',
+          ],
+          exampleInvalidValues: [
+            'this is an argument \n with newlines and \" double quotes',
+          ],
+        },
+      },
+      examples: [
+        {
+          arguments: ['2'],
+          result: '7',
+        },
+        {
+          arguments: ['5.5'],
+          result: '0',
+        },
+      ],
+    };
+    const prompt = await formatter.format(action);
+    expect(prompt).toBe(`
+\tAction: think(firstArgument)
+\t\tDescription: Echoes a thought.
+\t\tArgument 0: firstArgument - The thought to be thunk.
+\t\t\tExample valid values: "this is an argument \\n with newlines and \\" double quotes"
+\t\t\tExample invalid values: "this is an argument \\n with newlines and \\" double quotes"
+\t\tExample 0:
+\t\t\tYOU: think("2")
+\t\t\tRESULT: 7
+\t\tExample 1:
+\t\t\tYOU: think("5.5")
+\t\t\tRESULT: 0`);
+  });
 });
