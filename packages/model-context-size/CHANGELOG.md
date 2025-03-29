@@ -1,3 +1,10 @@
+# [@anaplian/model-context-size-v1.0.9](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.8...@anaplian/model-context-size-v1.0.9) (2025-03-29)
+
+
+### Bug Fixes
+
+* **model-context-size:** added some of the most popular ollama models ([#137](https://github.com/anaplian-io/anaplian/issues/137)) ([074d7b8](https://github.com/anaplian-io/anaplian/commit/074d7b84ab875f317209b8dfb4c21b031a0bd78c))
+
 # [@anaplian/model-context-size-v1.0.8](https://github.com/anaplian-io/anaplian/compare/@anaplian/model-context-size-v1.0.7...@anaplian/model-context-size-v1.0.8) (2025-03-14)
 
 
