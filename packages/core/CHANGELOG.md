@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.1...@anaplian/core-v1.15.2) (2025-03-29)
+
+
+### Bug Fixes
+
+* **core:** list available actions if model uses a nonexistent action ([#132](https://github.com/anaplian-io/anaplian/issues/132)) ([02183b5](https://github.com/anaplian-io/anaplian/commit/02183b5fca9188699febf5177ebdedb144ea1758))
+
 # [@anaplian/core-v1.15.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.0...@anaplian/core-v1.15.1) (2025-03-27)
 
 
