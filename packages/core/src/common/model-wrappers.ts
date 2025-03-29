@@ -1,45 +1,51 @@
 import { AnaplianModel, isDefined } from './types';
 import { RootFormatter } from '../formatters/root-formatter';
-import { SystemMessage } from '@langchain/core/messages';
 import { StringOutputParser } from '@langchain/core/output_parsers';
 import { BaseLanguageModel } from '@langchain/core/language_models/base';
+import { MessageContentComplex, SystemMessage } from '@langchain/core/messages';
 
 export const wrapModel = (
   model: BaseLanguageModel,
   rootFormatter: RootFormatter,
 ): AnaplianModel => ({
   invoke: async (context) => {
-    const formattedPartialPrompt = rootFormatter.formatPartial();
-    const serializedContext = rootFormatter.serializeContext(context);
-    const contextImages: SystemMessage[] = Object.values(context)
+    const contextImages: MessageContentComplex[] = Object.values(context)
       .map((context) => context.IMAGES)
       .filter(isDefined)
       .flatMap((imageCollection) =>
         imageCollection.map(
           (imageDefinition) =>
-            new SystemMessage({
-              content: [
-                {
-                  type: 'text',
-                  text: imageDefinition.annotation,
+            <MessageContentComplex>[
+              {
+                type: 'text',
+                text: imageDefinition.annotation,
+              },
+              {
+                type: 'image_url',
+                image_url: {
+                  detail: imageDefinition.imageDetail,
+                  url: `data:image/${imageDefinition.imageType};base64,${imageDefinition.imageContent.toString('base64')}`,
                 },
-                {
-                  type: 'image_url',
-                  image_url: {
-                    detail: imageDefinition.imageDetail,
-                    url: `data:image/${imageDefinition.imageType};base64,${imageDefinition.imageContent.toString('base64')}`,
-                  },
-                },
-              ],
-            }),
+              },
+            ],
         ),
       );
-    const messages = [
-      new SystemMessage(await formattedPartialPrompt),
+    const messages: MessageContentComplex[] = [
       ...contextImages,
-      new SystemMessage(serializedContext),
+      {
+        type: 'text',
+        text: await rootFormatter.formatPartial(),
+      },
+      {
+        type: 'text',
+        text: rootFormatter.serializeContext(context),
+      },
     ];
-    return model.pipe(new StringOutputParser()).invoke(messages);
+    return model.pipe(new StringOutputParser()).invoke([
+      new SystemMessage({
+        content: messages,
+      }),
+    ]);
   },
   getTokenCount: (content) => model.getNumTokens(content),
 });

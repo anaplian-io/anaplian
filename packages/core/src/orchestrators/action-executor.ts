@@ -29,7 +29,9 @@ export class ActionExecutor {
       (action) => action.name === command,
     )[0];
     if (!selectedAction) {
-      throw new NoSuchActionError(`"${command}" is not a recognized action`);
+      throw new NoSuchActionError(
+        `"${command}" is not a recognized action. Available actions: ${availableActions.map((availableAction) => availableAction.name).join(', ')}`,
+      );
     }
     const unsplitArguments = commandParseMatch[2];
     const parsedArguments = (unsplitArguments?.match(argumentRegex) || []).map(
