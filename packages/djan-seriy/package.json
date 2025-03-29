@@ -22,9 +22,8 @@
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/djan-seriy",
   "dependencies": {
     "@anaplian/core": "*",
-    "@anaplian/discord": "*",
     "@anaplian/web": "*",
-    "@langchain/openai": "*",
+    "@langchain/ollama": "^0.2.0",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
