@@ -1,6 +1,6 @@
 {
   "name": "@anaplian/core",
-  "version": "1.15.2",
+  "version": "1.15.3",
   "description": "Anaplian core library for long running AI agent development",
   "type": "module",
   "main": "./dist/cjs/index.js",

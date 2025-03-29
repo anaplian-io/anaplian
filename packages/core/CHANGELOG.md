@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.2...@anaplian/core-v1.15.3) (2025-03-29)
+
+
+### Bug Fixes
+
+* **core:** fixed image parsing, which only works for chat models ([#134](https://github.com/anaplian-io/anaplian/issues/134)) ([74cdadf](https://github.com/anaplian-io/anaplian/commit/74cdadf2fe719e154316d1de5357c1bd44a867ea))
+
 # [@anaplian/core-v1.15.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.1...@anaplian/core-v1.15.2) (2025-03-29)
 
 
