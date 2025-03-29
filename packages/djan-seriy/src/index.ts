@@ -13,7 +13,7 @@ import { getEnvironmentVariable } from './environment';
 import { HttpGetMarkdownAction, TavilySearchAction } from '@anaplian/web';
 import { tavily } from '@tavily/core';
 import 'dotenv/config';
-import { Ollama } from '@langchain/ollama';
+import { ChatOllama } from '@langchain/ollama';
 
 const directive = getEnvironmentVariable('DIRECTIVE');
 const tavilyApiKey = getEnvironmentVariable('TAVILY_API_KEY');
@@ -22,8 +22,8 @@ let djanSeriy: AnaplianAgent | undefined;
 (async () => {
   const agent = await new AgentBuilder({
     roleAssignmentDirective: directive,
-    model: new Ollama({
-      model: 'gemma3:27b',
+    model: new ChatOllama({
+      model: 'llama3.2-vision:90b',
     }),
   })
     .setContextWindowSize(128_000)
