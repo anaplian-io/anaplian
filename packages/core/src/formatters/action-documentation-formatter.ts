@@ -29,7 +29,7 @@ const fullPrompt = PromptTemplate.fromTemplate(`
 `);
 
 const escapeArgument = (str: string): string =>
-  str.replaceAll('\n', '\\n').replaceAll('\"', '\\"');
+  str.replaceAll('\n', '\\n').replaceAll('"', '\\"');
 
 export class ActionDocumentationFormatter implements Formatter<Action> {
   constructor(private readonly props: ActionDocumentationFormatterProps) {}

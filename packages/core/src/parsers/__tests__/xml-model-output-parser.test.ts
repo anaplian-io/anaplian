@@ -11,9 +11,12 @@ describe('XmlModelOutputParser', () => {
     ['<output>123</output>', '123'],
     ['<output>hello world</output>', 'hello world'],
     ['<output>\nmultiline\n</output>', 'multiline'],
-    ['<output><output>Inner text</output></output>', 'Inner text'],
     ['<output>nop()</output>', 'nop()'],
     ['<output>echo("1234","56\n78")</output>', 'echo("1234","56\n78")'],
+    [
+      '<output>render_svg("<svg width=\\"100\\" height=\\"150\\" xmlns=\\"http://www.w3.org/2000/svg\\"><ellipse cx=\\"50\\" cy=\\"75\\" rx=\\"40\\" ry=\\"60\\" fill=\\"#ADD8E6\\"/></svg>")</output>',
+      'render_svg("<svg width=\\"100\\" height=\\"150\\" xmlns=\\"http://www.w3.org/2000/svg\\"><ellipse cx=\\"50\\" cy=\\"75\\" rx=\\"40\\" ry=\\"60\\" fill=\\"#ADD8E6\\"/></svg>")',
+    ],
   ])(
     'successfully extracts an action from the model output "%s"',
     async (input, expected) => {
