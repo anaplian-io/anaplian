@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.4](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.3...@anaplian/core-v1.15.4) (2025-03-30)
+
+
+### Bug Fixes
+
+* **core:** fixed an issue where action arguments containing XML tags could not be parsed ([#138](https://github.com/anaplian-io/anaplian/issues/138)) ([9d19798](https://github.com/anaplian-io/anaplian/commit/9d19798a184f26652eef94dcecf236fdcd2527ab))
+
 # [@anaplian/core-v1.15.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.2...@anaplian/core-v1.15.3) (2025-03-29)
 
 
