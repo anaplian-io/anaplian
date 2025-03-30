@@ -195,10 +195,10 @@ describe('ActionDocumentationFormatter', () => {
         firstArgument: {
           description: 'The thought to be thunk.',
           exampleValidValues: [
-            'this is an argument \n with newlines and \" double quotes',
+            'this is an argument \n with newlines and " double quotes',
           ],
           exampleInvalidValues: [
-            'this is an argument \n with newlines and \" double quotes',
+            'this is an argument \n with newlines and " double quotes',
           ],
         },
       },

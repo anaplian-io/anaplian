@@ -1,7 +1,7 @@
 import { ModelOutputParser } from './model-output-parser';
 import { IncorrectOutputFormatError } from '../errors/agent-error';
 
-const outputSelectionRegex = /<output>([^<]*)<\/output>/;
+const outputSelectionRegex = /<output>(.*?)<\/output>/s;
 
 export const xmlModelOutputParser: ModelOutputParser = {
   modelInstructions:
