@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@anaplian/core": "^1.12.3",
-    "@tavily/core": "^0.3.1",
+    "@tavily/core": "^0.5.0",
     "@types/jest": "^29.5.14",
     "@types/turndown": "^5.0.5",
     "jest": "^29.7.0",
