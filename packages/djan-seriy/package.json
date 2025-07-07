@@ -24,7 +24,7 @@
     "@anaplian/core": "*",
     "@anaplian/web": "*",
     "@langchain/ollama": "^0.2.0",
-    "dotenv": "^16.4.7"
+    "dotenv": "^17.0.1"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
