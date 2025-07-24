@@ -41,18 +41,21 @@
     "@anaplian/model-context-size": "^1.0.8",
     "@langchain/core": "^0.3.26",
     "@langchain/openai": "^0.5.7",
+    "@modelcontextprotocol/sdk": "^1.15.1",
     "@types/jest": "^30.0.0",
     "jest": "^30.0.5",
     "ts-auto-guard": "^5.0.1",
     "ts-jest": "^29.2.5",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "zod": "^3.25.67"
   },
   "publishConfig": {
     "access": "public"
   },
   "peerDependencies": {
     "@anaplian/model-context-size": ">=1.0.4 <1.1.0",
-    "@langchain/core": ">=0.3.26 <0.4.0"
+    "@langchain/core": ">=0.3.26 <0.4.0",
+    "@modelcontextprotocol/sdk": ">= 1.15.0 <2.0.0"
   },
   "keywords": [
     "llm",

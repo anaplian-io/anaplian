@@ -28,6 +28,8 @@ import {
   InvalidAgentParametersError,
 } from '../errors/agent-validation-error';
 import { serializeWithoutImages } from '../common';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
+import { getActionsFromMcp } from '../mcp/get-actions-from-mcp';
 
 /**
  * Defines the required properties for {@link AgentBuilder}.
@@ -56,6 +58,7 @@ export interface AgentBuilderProps {
  */
 export class AgentBuilder {
   private readonly actions: Action[] = [];
+  private readonly mcpClients: Client[] = [];
   private readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
     readonly weight: number;
@@ -82,6 +85,16 @@ export class AgentBuilder {
     action: Action<T>,
   ): this => {
     this.actions.push(action as Action);
+    return this;
+  };
+
+  /**
+   * Adds actions from tools available in a model context protocol client.
+   *
+   * @param mcpClient {Client} - A connected MCP client.
+   */
+  public readonly addMcpClient = (mcpClient: Client): this => {
+    this.mcpClients.push(mcpClient);
     return this;
   };
 
@@ -163,6 +176,15 @@ export class AgentBuilder {
     const serializer = serializeWithoutImages;
     const leftPadding = '\t';
     const modelOutputParser: ModelOutputParser = xmlModelOutputParser;
+    this.actions.push(
+      ...(
+        await Promise.all(
+          this.mcpClients.map((client) => getActionsFromMcp(client)),
+        )
+      )
+        .flat()
+        .map((action) => action as Action),
+    );
     const rootFormatter = new RootFormatter({
       serializer,
       actionDocumentationFormatter: new ActionDocumentationFormatter({

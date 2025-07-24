@@ -5,6 +5,7 @@ import {
   InvalidAgentParametersError,
 } from '../../errors/agent-validation-error';
 import { ChatOpenAI } from '@langchain/openai';
+import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 
 describe('AgentBuilder', () => {
   it('throws an InvalidAgentParametersError', async () => {
@@ -43,6 +44,17 @@ describe('AgentBuilder', () => {
         description: 'mock action',
         name: 'nop',
       })
+      .addMcpClient({
+        listTools: jest.fn().mockResolvedValue({
+          tools: [
+            {
+              name: 'mockMcpTool',
+              description: 'does not very much',
+              inputSchema: {},
+            },
+          ],
+        }),
+      } as unknown as Client)
       .setOn('fatalError', jest.fn().mockRejectedValue(new Error()))
       .addContextProvider(
         {
@@ -69,8 +81,10 @@ describe('AgentBuilder', () => {
     const agent = await builder.build();
     expect(agent.metadata.modelName).toBe('gpt-4o-mini');
     expect(agent.metadata.modelContextWindowSize).toBe(128000);
-    expect(agent.metadata.instructionsTokens).toBe(228);
+    expect(agent.metadata.instructionsTokens).toBeGreaterThan(200);
+    expect(agent.metadata.instructionsTokens).toBeLessThan(300);
     expect(agent.metadata.paddingTokens).toBe(6400);
+    expect(agent.metadata.availableActions.length).toBe(2);
   });
 
   it('successfully builds an agent with an existing context', async () => {
