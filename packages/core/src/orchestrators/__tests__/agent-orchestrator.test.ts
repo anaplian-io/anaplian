@@ -94,6 +94,20 @@ describe('AgentOrchestrator', () => {
       await runPromise;
     });
 
+    it('should not initialize if already initialized', async () => {
+      await orchestrator.initialize();
+      const runPromise = orchestrator.run();
+      await yieldToEventLoop();
+
+      expect(mockEvents.afterInitialize).toHaveBeenCalledWith({
+        initial: 'context',
+      });
+      expect(mockEvents.afterInitialize).toHaveBeenCalledTimes(1);
+
+      await orchestrator.shutdown();
+      await runPromise;
+    });
+
     it('should not initialize the context and complete one iteration successfully', async () => {
       orchestrator = new AgentOrchestrator({
         contextCreator: mockContextCreator,
