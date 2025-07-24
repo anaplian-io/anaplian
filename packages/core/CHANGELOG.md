@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.15.5](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.4...@anaplian/core-v1.15.5) (2025-07-24)
+
+
+### Bug Fixes
+
+* **core:** added coverage of uncovered branch ([#228](https://github.com/anaplian-io/anaplian/issues/228)) ([7b8189e](https://github.com/anaplian-io/anaplian/commit/7b8189ecdb6dae436add4e72e259d09a0f833029))
+
 # [@anaplian/core-v1.15.4](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.3...@anaplian/core-v1.15.4) (2025-03-30)
 
 
