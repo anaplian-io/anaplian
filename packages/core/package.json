@@ -41,8 +41,8 @@
     "@anaplian/model-context-size": "^1.0.8",
     "@langchain/core": "^0.3.26",
     "@langchain/openai": "^0.5.7",
-    "@types/jest": "^29.5.14",
-    "jest": "^29.7.0",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.0.5",
     "ts-auto-guard": "^5.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2"
