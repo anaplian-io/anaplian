@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.16.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.5...@anaplian/core-v1.16.0) (2025-07-24)
+
+
+### Features
+
+* **core:** support actions from model context protocol ([#230](https://github.com/anaplian-io/anaplian/issues/230)) ([db94bf8](https://github.com/anaplian-io/anaplian/commit/db94bf8eee29dd733d609bfc91f5736c67986ba9))
+
 # [@anaplian/core-v1.15.5](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.4...@anaplian/core-v1.15.5) (2025-07-24)
 
 
