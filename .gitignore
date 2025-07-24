@@ -136,3 +136,4 @@ dist
 
 # Local
 agent.sh
+.aider*
