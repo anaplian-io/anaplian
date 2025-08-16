@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.16.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.0...@anaplian/core-v1.16.1) (2025-08-16)
+
+
+### Bug Fixes
+
+* **core:** improve stability of unit test ([#246](https://github.com/anaplian-io/anaplian/issues/246)) ([d515380](https://github.com/anaplian-io/anaplian/commit/d5153800f456d02fa7d1360faf89ba34e692ee98))
+
 # [@anaplian/core-v1.16.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.15.5...@anaplian/core-v1.16.0) (2025-07-24)
 
 
