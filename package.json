@@ -11,9 +11,10 @@
     "prettier": "prettier --check .",
     "format": "npm run lint:fix && prettier --write .",
     "build": "npm run lint && npm run prettier && lerna run build",
+    "build:ci": "npm ci && npm run build && npm run test:ci",
     "test": "lerna run test",
     "test:ci": "lerna run test:ci",
-    "clean": "lerna run clean",
+    "clean": "lerna run clean && rm -rf node_modules",
     "semantic-release": "lerna run semantic-release",
     "prepare": "husky"
   },

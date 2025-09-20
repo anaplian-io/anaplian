@@ -20,6 +20,7 @@ describe('TavilySearchAction', () => {
   it('performs a search with tavily', async () => {
     expect.assertions(3);
     const searchMock = jest.spyOn(tavilyClient, 'search').mockResolvedValue({
+      requestId: 'request-id',
       answer: 'This is an answer!',
       query: 'What is the answer?',
       responseTime: 99,
