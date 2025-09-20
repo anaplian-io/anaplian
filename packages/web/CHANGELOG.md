@@ -1,3 +1,10 @@
+# [@anaplian/web-v1.2.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.2.1...@anaplian/web-v1.2.2) (2025-09-20)
+
+
+### Bug Fixes
+
+* **core:** upgrade dependencies and perform basic maintenance ([#278](https://github.com/anaplian-io/anaplian/issues/278)) ([cbb7321](https://github.com/anaplian-io/anaplian/commit/cbb73210e7368d53001cdd39b1ba4e161f485011))
+
 # [@anaplian/web-v1.2.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/web-v1.2.0...@anaplian/web-v1.2.1) (2025-01-22)
 
 
