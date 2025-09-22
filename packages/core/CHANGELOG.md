@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.16.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.1...@anaplian/core-v1.16.2) (2025-09-22)
+
+
+### Bug Fixes
+
+* **core:** upgraded djan-seriy to construct independent agent artifacts ([#280](https://github.com/anaplian-io/anaplian/issues/280)) ([ecf35c3](https://github.com/anaplian-io/anaplian/commit/ecf35c31ab9c64645f2328c50c7e4e26e336ab7b))
+
 # [@anaplian/core-v1.16.1](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.0...@anaplian/core-v1.16.1) (2025-08-16)
 
 
