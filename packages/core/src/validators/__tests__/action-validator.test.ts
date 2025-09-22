@@ -179,7 +179,7 @@ describe('ActionValidator', () => {
     expect(result.valid).toBeFalsy();
     if (result.valid === false) {
       expect(result.reason).toBe(
-        'mock action1: Action name "mock action1" does not match regex /^(\\w+)$/',
+        'mock action1: Action name "mock action1" does not match regex /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();
@@ -213,7 +213,7 @@ describe('ActionValidator', () => {
     expect(result.valid).toBeFalsy();
     if (result.valid === false) {
       expect(result.reason).toBe(
-        'mockAction: Argument "arg 2" does not match regex /^(\\w+)$/',
+        'mockAction: Argument "arg 2" does not match regex /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/',
       );
     }
     expect(action.apply).not.toHaveBeenCalled();
