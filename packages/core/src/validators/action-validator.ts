@@ -2,7 +2,7 @@ import { Action, ActionArgument } from '../actions';
 import { Validator } from './validator';
 import { extractArguments } from '../common/extract-arguments';
 
-const nameRegex = /^(\w+)$/;
+const nameRegex = /^[A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*$/;
 
 export class ActionValidator implements Validator<Action> {
   public readonly validate = async <T extends string>(

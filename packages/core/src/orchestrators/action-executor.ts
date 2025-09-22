@@ -10,7 +10,7 @@ export interface ActionExecutorProps {
   readonly availableActions: Action<never | string>[];
 }
 
-const commandRegex = /^(\w+)\((.*)\)$/;
+const commandRegex = /^([A-Za-z0-9]+(?:[_-][A-Za-z0-9]+)*)\((.*)\)$/;
 const argumentRegex = /"(?:\\.|[^"\\])*"/g;
 
 export class ActionExecutor {
