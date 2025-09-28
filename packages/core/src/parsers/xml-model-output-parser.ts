@@ -17,6 +17,11 @@ export const xmlModelOutputParser: ModelOutputParser = {
     'For example: \n' +
     "'''\n" +
     '<output>bar("I am considering the meaning of\\n \\"input\\"")</output>\n' +
+    "'''\n" +
+    'If you pass structured arguments (such as JSON) to an action, it must be stringified.' +
+    'For example, to pass `{"baz": "foo"}`: \n' +
+    "'''\n" +
+    '<output>bar("{\"baz\": \"foo\"}")</output>\n' +
     "'''\n",
   parse: async (input) => {
     const match = input.match(outputSelectionRegex);
