@@ -6,6 +6,7 @@ export type AgentConfig = {
   readonly title?: string;
   readonly version: string;
   readonly description?: string;
+  readonly guidance?: string;
   readonly model: BaseLLM | BaseChatModel;
   readonly contextWindowSize: number;
   readonly annotations?: {

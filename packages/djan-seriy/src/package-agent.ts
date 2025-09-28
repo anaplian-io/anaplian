@@ -17,7 +17,7 @@ export const packageAgent = async (
   let returnedResult: string = '<AGENT RETURNED NO VALUE>';
   const agentBuilder = new AgentBuilder({
     model: config.model,
-    roleAssignmentDirective: `${config.query}\nUse the "return" action to return your response to the user.`,
+    roleAssignmentDirective: `User query: \n\n> ${config.query}\n\nUse the "return" action to return your response to the user.\n${config.guidance}`,
   })
     .setContextWindowSize(config.contextWindowSize)
     .addAction(new ReturnAction())
