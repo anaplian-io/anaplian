@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.16.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.2...@anaplian/core-v1.16.3) (2025-09-28)
+
+
+### Bug Fixes
+
+* **core:** improve handling of structured input to actions ([#286](https://github.com/anaplian-io/anaplian/issues/286)) ([b824c36](https://github.com/anaplian-io/anaplian/commit/b824c3627f0aca01247a9299cce6de8ec82b0996))
+
 # [@anaplian/core-v1.16.2](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.1...@anaplian/core-v1.16.2) (2025-09-22)
 
 
