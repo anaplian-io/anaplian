@@ -51,7 +51,9 @@ export class AgentOrchestrator {
         await this.props.contextCreator.createInitialContext(),
       );
     }
-    this.props.events.afterInitialize(this.currentContext).catch(() => {});
+    await this.props.events
+      .afterInitialize(this.currentContext)
+      .catch(() => {});
     this.initialized = true;
   };
 
@@ -59,7 +61,9 @@ export class AgentOrchestrator {
     if (!this.initialized) {
       await this.initialize();
     }
-    this.props.events.beforeIterationStart(this.currentContext).catch(() => {});
+    await this.props.events
+      .beforeIterationStart(this.currentContext)
+      .catch(() => {});
     this.currentContext = await this.props.contextCreator.refreshContext(
       this.currentContext,
     );
@@ -88,7 +92,9 @@ export class AgentOrchestrator {
         }),
       )
       .then((newContext) => Object.freeze(newContext));
-    this.props.events.afterIterationEnd(this.currentContext).catch(() => {});
+    await this.props.events
+      .afterIterationEnd(this.currentContext)
+      .catch(() => {});
   };
 
   public readonly shutdown: AnaplianAgent['shutdown'] = async () => {
