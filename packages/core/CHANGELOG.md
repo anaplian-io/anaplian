@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.16.4](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.3...@anaplian/core-v1.16.4) (2025-09-29)
+
+
+### Bug Fixes
+
+* **core:** events are now executed synchronously to prevent race conditions ([#289](https://github.com/anaplian-io/anaplian/issues/289)) ([769b656](https://github.com/anaplian-io/anaplian/commit/769b65677ea07b3a4baf91a55f80ecfb742b3c41))
+
 # [@anaplian/core-v1.16.3](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.2...@anaplian/core-v1.16.3) (2025-09-28)
 
 
