@@ -1,3 +1,10 @@
+# [@anaplian/core-v1.17.0](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.4...@anaplian/core-v1.17.0) (2025-09-30)
+
+
+### Features
+
+* **core:** allow exclusion of undesired tools from MCP servers ([#295](https://github.com/anaplian-io/anaplian/issues/295)) ([6eead0f](https://github.com/anaplian-io/anaplian/commit/6eead0f7d56f5aeaeb715255c13025908e39d9c1))
+
 # [@anaplian/core-v1.16.4](https://github.com/anaplian-io/anaplian/compare/@anaplian/core-v1.16.3...@anaplian/core-v1.16.4) (2025-09-29)
 
 
