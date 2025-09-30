@@ -20,6 +20,6 @@ export default {
     destructiveHint: false,
     openWorldHint: false,
   },
-  contextWindowSize: 60_000,
+  contextWindowSize: 100_000,
   mcpServers: {},
 } satisfies AgentConfig;

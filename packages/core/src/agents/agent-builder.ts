@@ -54,11 +54,24 @@ export interface AgentBuilderProps {
 }
 
 /**
+ * Options when importing model context protocol clients.
+ */
+interface McpClientOptions {
+  /**
+   * An array of tool names that should be included. All other tools will be excluded.
+   */
+  readonly enabledTools?: string[];
+}
+
+/**
  * Builds an {@link AnaplianAgent}.
  */
 export class AgentBuilder {
   private readonly actions: Action[] = [];
-  private readonly mcpClients: Client[] = [];
+  private readonly mcpClients: {
+    readonly client: Client;
+    readonly enabledTools?: string[];
+  }[] = [];
   private readonly contextProviders: {
     readonly provider: ContextProvider<never, never>;
     readonly weight: number;
@@ -92,9 +105,16 @@ export class AgentBuilder {
    * Adds actions from tools available in a model context protocol client.
    *
    * @param mcpClient {Client} - A connected MCP client.
+   * @param options {McpClientOptions} - A set of optional parameters for importing the MCP client.
    */
-  public readonly addMcpClient = (mcpClient: Client): this => {
-    this.mcpClients.push(mcpClient);
+  public readonly addMcpClient = (
+    mcpClient: Client,
+    options?: McpClientOptions,
+  ): this => {
+    this.mcpClients.push({
+      client: mcpClient,
+      enabledTools: options?.enabledTools,
+    });
     return this;
   };
 
@@ -179,7 +199,17 @@ export class AgentBuilder {
     this.actions.push(
       ...(
         await Promise.all(
-          this.mcpClients.map((client) => getActionsFromMcp(client)),
+          this.mcpClients.map((clientBundle) =>
+            getActionsFromMcp(clientBundle.client).then((actions) => {
+              if (clientBundle.enabledTools) {
+                const enabledToolsSet = new Set(clientBundle.enabledTools);
+                return actions.filter((action) =>
+                  enabledToolsSet.has(action.name),
+                );
+              }
+              return actions;
+            }),
+          ),
         )
       )
         .flat()

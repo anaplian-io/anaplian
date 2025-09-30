@@ -54,7 +54,9 @@ export const packageAgent = async (
           args: definition.args,
         }),
       );
-      agentBuilder.addMcpClient(mcpClient);
+      agentBuilder.addMcpClient(mcpClient, {
+        enabledTools: definition.allowedTools,
+      });
     }),
   );
   agent = await agentBuilder.build();
