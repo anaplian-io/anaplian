@@ -30,4 +30,8 @@ import * as fs from 'node:fs';
       2,
     ),
   );
+  fs.writeFileSync(
+    `${outdir}/config.json`,
+    JSON.stringify(agentConfig, null, 2),
+  );
 })();

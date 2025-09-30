@@ -49,12 +49,33 @@ describe('AgentBuilder', () => {
           tools: [
             {
               name: 'mockMcpTool',
-              description: 'does not very much',
+              description: 'does not do very much',
               inputSchema: {},
             },
           ],
         }),
       } as unknown as Client)
+      .addMcpClient(
+        {
+          listTools: jest.fn().mockResolvedValue({
+            tools: [
+              {
+                name: 'allowedMockMcpTool',
+                description: 'does not do very much',
+                inputSchema: {},
+              },
+              {
+                name: 'rejectedMcpTool',
+                description: 'still does not do very much',
+                inputSchema: {},
+              },
+            ],
+          }),
+        } as unknown as Client,
+        {
+          enabledTools: ['allowedMockMcpTool'],
+        },
+      )
       .setOn('fatalError', jest.fn().mockRejectedValue(new Error()))
       .addContextProvider(
         {
@@ -79,11 +100,16 @@ describe('AgentBuilder', () => {
         2,
       );
     const agent = await builder.build();
+    const allActionNames = agent.metadata.availableActions.map(
+      (action) => action.name,
+    );
     expect(agent.metadata.modelName).toBe('gpt-4o-mini');
     expect(agent.metadata.modelContextWindowSize).toBe(128000);
     expect(agent.metadata.instructionsTokens).toBeGreaterThan(0);
     expect(agent.metadata.paddingTokens).toBe(6400);
-    expect(agent.metadata.availableActions.length).toBe(2);
+    expect(allActionNames.length).toBe(3);
+    expect(allActionNames).toContain('allowedMockMcpTool');
+    expect(allActionNames).not.toContain('rejectedMcpTool');
   });
 
   it('successfully builds an agent with an existing context', async () => {

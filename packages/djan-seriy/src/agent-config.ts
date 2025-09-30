@@ -19,6 +19,7 @@ export type AgentConfig = {
     string,
     {
       readonly command: string;
+      readonly allowedTools?: string[];
       readonly args?: string[];
       readonly env?: Record<string, string>;
       readonly cwd?: string;

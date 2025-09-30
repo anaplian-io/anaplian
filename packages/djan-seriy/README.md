@@ -11,3 +11,11 @@ npm run build
 - Djan-Seriy constructs portable artifacts in its `dist/` directory.
 - Each constructed agent operates as a STDIO model context protocol server.
 - Each constructed agent can itself have access to a list of model context protocol servers configured in `agent.config.ts`.
+
+## Inspecting
+
+Created servers can be inspected using
+
+```shell
+npm run inspect -- name-of-mcp-server
+```
