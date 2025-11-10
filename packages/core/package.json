@@ -39,7 +39,7 @@
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/core",
   "devDependencies": {
     "@anaplian/model-context-size": "^1.0.8",
-    "@langchain/core": "^0.3.26",
+    "@langchain/core": "^1.0.3",
     "@langchain/openai": "^0.6.7",
     "@modelcontextprotocol/sdk": "^1.15.1",
     "@types/jest": "^30.0.0",
