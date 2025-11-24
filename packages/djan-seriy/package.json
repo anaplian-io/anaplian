@@ -24,7 +24,7 @@
     "@anaplian/core": "*",
     "@langchain/openai": "^0.6.13",
     "@modelcontextprotocol/sdk": "^1.18.1",
-    "zod": "^3.25.76"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "esbuild": "^0.25.0",
