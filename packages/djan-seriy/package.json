@@ -22,7 +22,7 @@
   "homepage": "https://github.com/anaplian-io/anaplian/tree/main/packages/djan-seriy",
   "dependencies": {
     "@anaplian/core": "*",
-    "@langchain/openai": "^0.6.13",
+    "@langchain/openai": "^1.1.3",
     "@modelcontextprotocol/sdk": "^1.18.1",
     "zod": "^3.25.76"
   },
